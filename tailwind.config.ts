@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,26 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Pivota custom colors
+				pivota: {
+					purple: {
+						DEFAULT: '#7E69AB',
+						light: '#9b87f5',
+						dark: '#6E59A5',
+					},
+					orange: {
+						DEFAULT: '#F97316',
+						light: '#FEC6A1',
+					},
+					green: {
+						DEFAULT: '#98E2C6',
+						light: '#F2FCE2',
+					},
+					gold: {
+						DEFAULT: '#FFCB5B',
+						light: '#FEF7CD',
+					},
 				}
 			},
 			borderRadius: {
@@ -84,11 +105,31 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-slow': {
+					'0%, 100%': {
+						opacity: 1
+					},
+					'50%': {
+						opacity: 0.8
+					}
+				},
+				'slide-in': {
+					'0%': {
+						transform: 'translateY(10px)',
+						opacity: 0
+					},
+					'100%': {
+						transform: 'translateY(0)',
+						opacity: 1
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-slow': 'pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'slide-in': 'slide-in 0.3s ease-out forwards'
 			}
 		}
 	},
