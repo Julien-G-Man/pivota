@@ -13,37 +13,37 @@ export default function QuickActions() {
     { 
       name: 'Send Money', 
       icon: Send, 
-      color: 'bg-pivota-purple-light/20', 
+      color: 'bg-primary/10', 
       onClick: () => console.log('Send Money') 
     },
     { 
       name: 'Pay Bills', 
       icon: CreditCard, 
-      color: 'bg-pivota-orange/20', 
+      color: 'bg-primary/20', 
       onClick: () => console.log('Pay Bills') 
     },
     { 
       name: 'Top Up', 
       icon: Upload, 
-      color: 'bg-pivota-green/20', 
+      color: 'bg-primary/30', 
       onClick: () => console.log('Top Up') 
     },
     { 
       name: 'Request', 
       icon: Download, 
-      color: 'bg-pivota-gold/20', 
+      color: 'bg-primary/40', 
       onClick: () => console.log('Request') 
     },
     { 
       name: 'Schedule', 
       icon: Calendar, 
-      color: 'bg-blue-500/20', 
+      color: 'bg-primary/50', 
       onClick: () => console.log('Schedule') 
     },
     { 
       name: 'Notifications', 
       icon: Bell, 
-      color: 'bg-pink-500/20', 
+      color: 'bg-primary/60', 
       onClick: () => console.log('Notifications') 
     },
   ];
@@ -56,7 +56,7 @@ export default function QuickActions() {
           <button
             key={action.name}
             onClick={action.onClick}
-            className={`action-button ${action.color}`}
+            className={`action-button ${action.color} text-primary hover:bg-primary/10`}
           >
             <action.icon size={24} className="mb-2" />
             <span className="text-xs">{action.name}</span>

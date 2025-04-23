@@ -17,21 +17,25 @@ const Index = () => {
       <div className="container max-w-md mx-auto p-4">
         <PivotaHeader title="Pivota" />
         
-        <Card className="mt-4 overflow-hidden">
-          <div className="bg-gradient-to-br from-pivota-purple to-pivota-purple-dark p-6 text-white">
-            <Balance balance={balance} currency={currency} className="text-white" />
+        <Card className="mt-4 overflow-hidden border-none shadow-lg">
+          <div className="bg-primary text-white p-6">
+            <Balance 
+              balance={balance} 
+              currency={currency} 
+              className="text-white" 
+            />
             
             <div className="flex mt-6 gap-4">
-              <button className="flex-1 py-2 px-4 rounded-lg bg-white/20 hover:bg-white/30 backdrop-blur-sm transition-colors text-sm font-medium">
+              <button className="flex-1 py-2 px-4 rounded-lg bg-white/20 hover:bg-white/30 text-sm font-medium transition-colors">
                 Add Money
               </button>
-              <button className="flex-1 py-2 px-4 rounded-lg bg-white text-pivota-purple hover:bg-white/90 transition-colors text-sm font-medium">
+              <button className="flex-1 py-2 px-4 rounded-lg bg-white text-primary hover:bg-white/90 transition-colors text-sm font-medium">
                 Transfer
               </button>
             </div>
           </div>
           
-          <CardContent className="p-6">
+          <CardContent className="p-6 bg-secondary/20">
             <QuickActions />
             <RecentTransactions />
           </CardContent>
