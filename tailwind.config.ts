@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -13,10 +12,10 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: "2rem",
       screens: {
-        '2xl': '1400px'
-      }
+        "2xl": "1400px",
+      },
     },
     extend: {
       colors: {
@@ -26,8 +25,9 @@ export default {
         background: 'hsl(0, 0%, 100%)',
         foreground: 'hsl(222, 47%, 11%)',
         primary: {
-          DEFAULT: 'hsl(230, 60%, 40%)', // Deep Navy Blue
-          foreground: 'hsl(0, 0%, 100%)'
+          DEFAULT: 'hsl(230, 60%, 30%)', // Deeper Navy Blue
+          foreground: 'hsl(0, 0%, 100%)',
+          light: 'hsl(230, 60%, 50%)', // Slightly lighter for better contrast
         },
         secondary: {
           DEFAULT: 'hsl(230, 30%, 95%)', // Light Navy Blue
@@ -93,4 +93,3 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
