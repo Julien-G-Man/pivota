@@ -20,14 +20,14 @@ export default function Balance({ balance, currency, className }: BalanceProps) 
   
   return (
     <div className={cn('flex flex-col items-center', className)}>
-      <div className="text-sm text-muted-foreground mb-1">Available Balance</div>
+      <div className="text-sm text-primary/70 mb-1 font-medium">Available Balance</div>
       <div className="flex items-center gap-2">
-        <div className={`text-4xl font-semibold transition-all duration-300 ${!showBalance && 'blur-md'}`}>
+        <div className={`text-4xl font-semibold text-primary transition-all duration-300 ${!showBalance && 'blur-md'}`}>
           {showBalance ? formatter.format(balance) : '••••••'}
         </div>
         <button 
           onClick={() => setShowBalance(!showBalance)} 
-          className="text-muted-foreground hover:text-primary transition-colors"
+          className="text-primary/70 hover:text-primary transition-colors"
         >
           {showBalance ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>
@@ -35,3 +35,4 @@ export default function Balance({ balance, currency, className }: BalanceProps) 
     </div>
   );
 }
+

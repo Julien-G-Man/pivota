@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -25,22 +26,21 @@ export default {
         background: 'hsl(0, 0%, 100%)',
         foreground: 'hsl(222, 47%, 11%)',
         primary: {
-          DEFAULT: 'hsl(215, 80%, 55%)', // Bright Blue
+          DEFAULT: 'hsl(230, 60%, 40%)', // Deep Navy Blue
           foreground: 'hsl(0, 0%, 100%)'
         },
         secondary: {
-          DEFAULT: 'hsl(210, 25%, 95%)', // Light Blue-Gray
+          DEFAULT: 'hsl(230, 30%, 95%)', // Light Navy Blue
           foreground: 'hsl(222, 47%, 11%)'
         },
         muted: {
-          DEFAULT: 'hsl(210, 25%, 95%)',
-          foreground: 'hsl(215, 10%, 50%)'
+          DEFAULT: 'hsl(230, 20%, 95%)',
+          foreground: 'hsl(230, 30%, 50%)'
         },
         accent: {
-          DEFAULT: 'hsl(215, 80%, 95%)', // Very Light Blue
-          foreground: 'hsl(215, 80%, 55%)'
+          DEFAULT: 'hsl(230, 50%, 95%)', // Very Light Navy Blue
+          foreground: 'hsl(230, 60%, 40%)'
         },
-        // Remove other color variants to keep it simple
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -93,3 +93,4 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
