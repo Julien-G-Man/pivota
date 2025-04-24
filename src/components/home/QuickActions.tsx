@@ -1,5 +1,6 @@
 
-import { CreditCard, Send, Download, Upload, Calendar, Bell } from 'lucide-react';
+import { CreditCard, Download, Upload, Wallet, Calendar, Bell } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface ActionItem {
   name: string;
@@ -9,42 +10,44 @@ interface ActionItem {
 }
 
 export default function QuickActions() {
+  const { toast } = useToast();
+  
   const actions: ActionItem[] = [
-    { 
-      name: 'Send Money', 
-      icon: Send, 
-      color: 'bg-primary/10', 
-      onClick: () => console.log('Send Money') 
-    },
     { 
       name: 'Pay Bills', 
       icon: CreditCard, 
+      color: 'bg-primary/10', 
+      onClick: () => toast({ title: "Pay Bills", description: "Coming soon!" })
+    },
+    { 
+      name: 'Withdraw', 
+      icon: Download, 
       color: 'bg-primary/20', 
-      onClick: () => console.log('Pay Bills') 
+      onClick: () => toast({ title: "Withdraw", description: "Coming soon!" })
     },
     { 
       name: 'Top Up', 
       icon: Upload, 
       color: 'bg-primary/30', 
-      onClick: () => console.log('Top Up') 
+      onClick: () => toast({ title: "Top Up", description: "Coming soon!" })
     },
     { 
-      name: 'Request', 
-      icon: Download, 
+      name: 'Invest', 
+      icon: Wallet, 
       color: 'bg-primary/40', 
-      onClick: () => console.log('Request') 
+      onClick: () => toast({ title: "Invest", description: "Coming soon!" })
     },
     { 
       name: 'Schedule', 
       icon: Calendar, 
       color: 'bg-primary/50', 
-      onClick: () => console.log('Schedule') 
+      onClick: () => toast({ title: "Schedule Payment", description: "Coming soon!" })
     },
     { 
-      name: 'Notifications', 
+      name: 'History', 
       icon: Bell, 
       color: 'bg-primary/60', 
-      onClick: () => console.log('Notifications') 
+      onClick: () => toast({ title: "Transaction History", description: "Coming soon!" })
     },
   ];
   
@@ -56,7 +59,7 @@ export default function QuickActions() {
           <button
             key={action.name}
             onClick={action.onClick}
-            className={`action-button ${action.color} text-primary hover:bg-primary/10`}
+            className={`flex flex-col items-center p-3 rounded-lg ${action.color} hover:bg-primary/10 transition-colors`}
           >
             <action.icon size={24} className="mb-2" />
             <span className="text-xs">{action.name}</span>
