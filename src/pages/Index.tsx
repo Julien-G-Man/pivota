@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Send, Banknote, BellRing, Headset } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,6 +8,8 @@ import RecentTransactions from '@/components/transactions/RecentTransactions';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
+import { TransferDialog } from '@/components/transfer/TransferDialog';
+import { AddMoneyDialog } from '@/components/transfer/AddMoneyDialog';
 
 const Index = () => {
   const { toast } = useToast();
@@ -71,14 +72,8 @@ const Index = () => {
             />
             
             <div className="grid grid-cols-2 gap-3 mt-6">
-              <button className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
-                <Send size={18} />
-                <span className="text-sm font-medium">Transfer</span>
-              </button>
-              <button className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
-                <Banknote size={18} />
-                <span className="text-sm font-medium">Add Money</span>
-              </button>
+              <TransferDialog />
+              <AddMoneyDialog />
             </div>
           </div>
           
