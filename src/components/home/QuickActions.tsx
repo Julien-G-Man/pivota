@@ -1,12 +1,14 @@
 
-import { CreditCard, Download, Upload, Wallet, Calendar, Bell } from 'lucide-react';
+import { CreditCard, Download, Upload, Wallet, Calendar, Bell, Globe } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { InternationalTransferDialog } from '@/components/transfer/InternationalTransferDialog';
 
 interface ActionItem {
   name: string;
   icon: React.ElementType;
   color: string;
-  onClick: () => void;
+  onClick?: () => void;
+  component?: React.ReactNode;
 }
 
 export default function QuickActions() {
@@ -49,6 +51,12 @@ export default function QuickActions() {
       color: 'bg-primary/60', 
       onClick: () => toast({ title: "Transaction History", description: "Coming soon!" })
     },
+    { 
+      name: 'Int\'l Transfer', 
+      icon: Globe, 
+      color: 'bg-primary/70', 
+      component: <InternationalTransferDialog />
+    },
   ];
   
   return (
@@ -56,14 +64,19 @@ export default function QuickActions() {
       <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
       <div className="grid grid-cols-3 gap-4">
         {actions.map((action) => (
-          <button
-            key={action.name}
-            onClick={action.onClick}
-            className={`flex flex-col items-center p-3 rounded-lg ${action.color} hover:bg-primary/10 transition-colors`}
-          >
-            <action.icon size={24} className="mb-2" />
-            <span className="text-xs">{action.name}</span>
-          </button>
+          <div key={action.name} className="flex items-center justify-center">
+            {action.component ? (
+              action.component
+            ) : (
+              <button
+                onClick={action.onClick}
+                className={`flex flex-col items-center p-3 rounded-lg ${action.color} hover:bg-primary/10 transition-colors`}
+              >
+                <action.icon size={24} className="mb-2" />
+                <span className="text-xs">{action.name}</span>
+              </button>
+            )}
+          </div>
         ))}
       </div>
     </div>
