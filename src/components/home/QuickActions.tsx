@@ -1,5 +1,5 @@
 
-import { CreditCard, Download, Upload, Wallet, Calendar, Bell, Globe } from 'lucide-react';
+import { CreditCard, Download, Upload, Wallet, Calendar, Globe } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { InternationalTransferDialog } from '@/components/transfer/InternationalTransferDialog';
 
@@ -24,32 +24,38 @@ export default function QuickActions() {
     { 
       name: 'Withdraw', 
       icon: Download, 
-      color: 'bg-primary/20', 
-      onClick: () => toast({ title: "Withdraw", description: "Coming soon!" })
+      color: 'bg-primary/20',
+      component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/20 hover:bg-primary/10 transition-colors">
+        <Download size={24} className="mb-2" />
+        <span className="text-xs">Withdraw</span>
+      </div>
     },
     { 
       name: 'Top Up', 
       icon: Upload, 
-      color: 'bg-primary/30', 
-      onClick: () => toast({ title: "Top Up", description: "Coming soon!" })
+      color: 'bg-primary/30',
+      component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/30 hover:bg-primary/10 transition-colors">
+        <Upload size={24} className="mb-2" />
+        <span className="text-xs">Top Up</span>
+      </div>
     },
     { 
       name: 'Invest', 
       icon: Wallet, 
-      color: 'bg-primary/40', 
-      onClick: () => toast({ title: "Invest", description: "Coming soon!" })
+      color: 'bg-primary/40',
+      component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/40 hover:bg-primary/10 transition-colors">
+        <Wallet size={24} className="mb-2" />
+        <span className="text-xs">Invest</span>
+      </div>
     },
     { 
       name: 'Schedule', 
       icon: Calendar, 
-      color: 'bg-primary/50', 
-      onClick: () => toast({ title: "Schedule Payment", description: "Coming soon!" })
-    },
-    { 
-      name: 'History', 
-      icon: Bell, 
-      color: 'bg-primary/60', 
-      onClick: () => toast({ title: "Transaction History", description: "Coming soon!" })
+      color: 'bg-primary/50',
+      component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/50 hover:bg-primary/10 transition-colors">
+        <Calendar size={24} className="mb-2" />
+        <span className="text-xs">Schedule</span>
+      </div>
     },
     { 
       name: 'Int\'l Transfer', 

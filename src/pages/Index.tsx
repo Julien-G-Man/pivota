@@ -16,7 +16,7 @@ const Index = () => {
   // In a real app, these would come from an API
   const [balance] = useState(1250000);
   const [currency] = useState('XAF');
-  const [userName] = useState('John');
+  const [userName] = useState('Julien');
 
   const handleSupportClick = () => {
     toast({
