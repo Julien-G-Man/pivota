@@ -1,4 +1,3 @@
-
 import { Fingerprint, Shield, Bell, User, CreditCard, Lock, Settings, MessageCircle } from 'lucide-react';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import PivotaHeader from '@/components/common/PivotaHeader';
@@ -7,9 +6,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   const profileMenuItems = [
     {
@@ -112,7 +118,7 @@ const Profile = () => {
         <Button 
           variant="outline" 
           className="w-full mt-6 text-destructive hover:text-destructive"
-          onClick={() => toast({ title: 'Logout', description: 'You would be logged out in a real app.' })}
+          onClick={handleLogout}
         >
           Logout
         </Button>
