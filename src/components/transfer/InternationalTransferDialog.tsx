@@ -104,7 +104,7 @@ export function InternationalTransferDialog() {
         </button>
       </DialogTrigger>
       
-      <DialogContent>
+      <DialogContent className="bg-background/95 backdrop-blur-sm">
         <DialogHeader>
           <DialogTitle>International Transfer</DialogTitle>
         </DialogHeader>
@@ -114,16 +114,20 @@ export function InternationalTransferDialog() {
             <div className="space-y-2">
               <Label htmlFor="currency">Select Currency</Label>
               <Select onValueChange={handleSelectCurrency}>
-                <SelectTrigger id="currency">
+                <SelectTrigger id="currency" className="bg-background border-2">
                   <SelectValue placeholder="Select currency" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-popover/95 backdrop-blur-sm border-2">
                   <SelectGroup>
                     {currencies.map((curr) => (
-                      <SelectItem key={curr.code} value={curr.code}>
+                      <SelectItem 
+                        key={curr.code} 
+                        value={curr.code}
+                        className="hover:bg-muted focus:bg-muted"
+                      >
                         <div className="flex items-center">
-                          <span className="mr-2">{curr.flag}</span>
-                          <span>{curr.country} - {curr.code} ({curr.name})</span>
+                          <span className="mr-2 text-lg">{curr.flag}</span>
+                          <span className="font-medium">{curr.country} - {curr.code} ({curr.name})</span>
                         </div>
                       </SelectItem>
                     ))}
