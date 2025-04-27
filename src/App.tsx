@@ -23,7 +23,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
 
 const AuthRoute = ({ children }: { children: React.ReactNode }) => {
   const user = localStorage.getItem("user");
-  return user ? <Navigate to="/" /> : children;
+  return user ? <Navigate to="/home" /> : children;
 };
 
 const App = () => (

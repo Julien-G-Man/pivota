@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -26,7 +25,7 @@ export default function Login() {
     
     // This will be replaced with Supabase auth later
     localStorage.setItem("user", JSON.stringify({ phone }));
-    navigate("/");
+    navigate("/home");
   };
 
   const handleBiometricLogin = () => {
