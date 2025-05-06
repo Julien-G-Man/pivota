@@ -10,13 +10,20 @@ import {
   Lock, 
   Award, 
   Megaphone, 
-  GraduationCap
+  GraduationCap,
+  UserRound,
+  QrCode
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
-import { useNavigate } from 'react-router-dom';
 
 export const createQuickActions = (toast: (props: { title: string; description: string }) => void): ActionItem[] => {
   return [
+    { 
+      name: 'To Friend', 
+      icon: UserRound, 
+      color: 'bg-primary/10', 
+      onClick: () => window.location.href = '/transfer/p2p'
+    },
     { 
       name: 'To Pivota', 
       icon: Send, 
@@ -34,6 +41,13 @@ export const createQuickActions = (toast: (props: { title: string; description: 
       icon: Download, 
       color: 'bg-primary/10',
       onClick: () => toast({ title: "Withdraw", description: "Coming soon!" })
+    },
+    { 
+      name: 'Scan QR', 
+      icon: QrCode, 
+      color: 'bg-primary/10',
+      special: true,
+      onClick: () => toast({ title: "QR Scanner", description: "QR scanning will be available soon!" })
     },
     { 
       name: 'Airtime', 

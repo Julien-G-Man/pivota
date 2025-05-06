@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +18,7 @@ import { ThemeToggle } from "./components/ThemeToggle";
 // New page imports
 import BankTransfer from "./pages/transfers/BankTransfer";
 import PivotaTransfer from "./pages/transfers/PivotaTransfer";
+import P2PTransfer from "./pages/transfers/P2PTransfer";
 import Airtime from "./pages/Airtime";
 import Data from "./pages/Data";
 import Support from "./pages/Support";
@@ -59,9 +59,12 @@ const App = () => (
               <Route path="/history" element={<PrivateRoute><History /></PrivateRoute>} />
               <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
               
-              {/* New Routes */}
+              {/* Transfer Routes */}
               <Route path="/transfer/bank" element={<PrivateRoute><BankTransfer /></PrivateRoute>} />
               <Route path="/transfer/pivota" element={<PrivateRoute><PivotaTransfer /></PrivateRoute>} />
+              <Route path="/transfer/p2p" element={<PrivateRoute><P2PTransfer /></PrivateRoute>} />
+              
+              {/* Other Routes */}
               <Route path="/airtime" element={<PrivateRoute><Airtime /></PrivateRoute>} />
               <Route path="/data" element={<PrivateRoute><Data /></PrivateRoute>} />
               <Route path="/support" element={<PrivateRoute><Support /></PrivateRoute>} />
