@@ -12,7 +12,9 @@ import {
   Megaphone, 
   GraduationCap,
   UserRound,
-  QrCode
+  QrCode,
+  LineChart,
+  PiggyBank
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 
@@ -35,6 +37,19 @@ export const createQuickActions = (toast: (props: { title: string; description: 
       icon: Building, 
       color: 'bg-primary/10',
       onClick: () => window.location.href = '/transfer/bank'
+    },
+    { 
+      name: 'Invest', 
+      icon: LineChart, 
+      color: 'bg-primary/10',
+      special: true,
+      onClick: () => toast({ title: "Invest", description: "Investment options coming soon!" })
+    },
+    { 
+      name: 'Deposit', 
+      icon: PiggyBank, 
+      color: 'bg-primary/10',
+      onClick: () => toast({ title: "Deposit", description: "Deposit options coming soon!" })
     },
     { 
       name: 'Withdraw', 
