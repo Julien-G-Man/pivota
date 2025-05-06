@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -45,7 +46,8 @@ export default {
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        sm: 'calc(var(--radius) - 4px)',
+        '3xl': '1.5rem',
       },
       keyframes: {
         'accordion-down': {
@@ -81,13 +83,26 @@ export default {
             transform: 'translateY(0)',
             opacity: 1
           }
+        },
+        // New iOS-like animation
+        'ios-bounce': {
+          '0%, 100%': {
+            transform: 'scale(1)'
+          },
+          '50%': {
+            transform: 'scale(0.97)'
+          }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'pulse-slow': 'pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'slide-in': 'slide-in 0.3s ease-out forwards'
+        'slide-in': 'slide-in 0.3s ease-out forwards',
+        'ios-bounce': 'ios-bounce 1.5s infinite',
+      },
+      backgroundImage: {
+        'gradient-ios': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
       }
     }
   },

@@ -14,10 +14,12 @@ export const QuickActionButton = ({ action }: QuickActionButtonProps) => {
   return (
     <button
       onClick={action.onClick}
-      className={`flex flex-col items-center p-3 rounded-lg ${action.color} hover:bg-primary/10 transition-colors`}
+      className="flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 hover:bg-primary/15 transition-all"
     >
-      <action.icon size={24} className="mb-2" />
-      <span className="text-xs">{action.name}</span>
+      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/20 mb-1">
+        <action.icon size={20} className="text-primary" />
+      </div>
+      <span className="text-xs text-center">{action.name}</span>
     </button>
   );
 };

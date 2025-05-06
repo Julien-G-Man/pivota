@@ -35,19 +35,13 @@ const mockTransactions = [
     date: new Date(2023, 3, 18, 9, 0),
     status: 'completed' as const,
   },
-  {
-    id: '4',
-    type: 'airtime' as TransactionType,
-    title: 'Airtime Recharge',
-    subtitle: 'Mobile',
-    amount: 15,
-    currency: 'XAF',
-    date: new Date(2023, 3, 17, 16, 45),
-    status: 'completed' as const,
-  },
 ];
 
-export default function RecentTransactions() {
+interface RecentTransactionsProps {
+  compact?: boolean;
+}
+
+export default function RecentTransactions({ compact = false }: RecentTransactionsProps) {
   const [filter, setFilter] = useState<string>('all');
   
   const filters = [
@@ -61,34 +55,43 @@ export default function RecentTransactions() {
     ? mockTransactions
     : mockTransactions.filter(t => t.type === filter);
   
+  const displayTransactions = compact 
+    ? filteredTransactions.slice(0, 2) 
+    : filteredTransactions;
+  
   return (
-    <div className="mt-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Recent Transactions</h2>
-        <Button variant="ghost" size="sm" className="text-xs">
-          See All
-        </Button>
-      </div>
+    <div>
+      {!compact && (
+        <>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Recent Transactions</h2>
+            <Button variant="ghost" size="sm" className="text-xs">
+              See All
+            </Button>
+          </div>
+          
+          <div className="flex gap-2 mb-4 overflow-x-auto py-2 scrollbar-none">
+            {filters.map((item) => (
+              <Button
+                key={item.id}
+                size="sm"
+                variant={filter === item.id ? "default" : "outline"}
+                onClick={() => setFilter(item.id)}
+                className="rounded-full text-xs px-4"
+              >
+                {item.label}
+              </Button>
+            ))}
+          </div>
+        </>
+      )}
       
-      <div className="flex gap-2 mb-4 overflow-x-auto py-2 scrollbar-none">
-        {filters.map((item) => (
-          <Button
-            key={item.id}
-            size="sm"
-            variant={filter === item.id ? "default" : "outline"}
-            onClick={() => setFilter(item.id)}
-            className="rounded-full text-xs px-4"
-          >
-            {item.label}
-          </Button>
-        ))}
-      </div>
-      
-      <div className="space-y-2">
-        {filteredTransactions.map((transaction) => (
+      <div className="space-y-0">
+        {displayTransactions.map((transaction) => (
           <TransactionItem
             key={transaction.id}
             {...transaction}
+            compact={compact}
           />
         ))}
       </div>
