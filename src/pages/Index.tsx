@@ -10,11 +10,12 @@ import { useToast } from '@/hooks/use-toast';
 import { AddMoneyDialog } from '@/components/transfer/AddMoneyDialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import Balance from '@/components/home/Balance';
 
 const Index = () => {
   const { toast } = useToast();
-  const [balance] = useState(3.37);
-  const [currency] = useState('₦');
+  const [balance] = useState(250000);
+  const [currency] = useState('F');
   const [userName] = useState('Julien Gman');
   const [showBalance, setShowBalance] = useState(true);
   
@@ -26,7 +27,7 @@ const Index = () => {
   const handleSupportClick = () => {
     toast({
       title: "Help",
-      description: "Chat with our support team coming soon!",
+      description: "Redirecting to Mona chat support...",
     });
   };
 
@@ -67,13 +68,13 @@ const Index = () => {
           </Link>
           
           <div className="flex items-center gap-4">
-            <button
-              onClick={handleSupportClick}
+            <Link 
+              to="/support"
               className="p-2 rounded-full hover:bg-muted/80 transition-colors relative"
             >
               <Headset size={20} className="text-muted-foreground" />
               <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">HELP</span>
-            </button>
+            </Link>
             <button
               onClick={handleQrCodeClick}
               className="p-2 rounded-full hover:bg-muted/80 transition-colors"
@@ -95,29 +96,9 @@ const Index = () => {
         {/* Main balance card with blue gradient */}
         <Card className="mt-4 overflow-hidden border-none shadow-lg rounded-xl">
           <div className="bg-gradient-to-br from-primary to-primary/70 text-white p-4">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <Shield size={20} className="text-white/80" />
-                <span className="text-sm font-medium text-white/90">Available Balance</span>
-                <button 
-                  onClick={() => setShowBalance(!showBalance)} 
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  {showBalance ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
-              
-              <div className="flex items-center">
-                <span className="text-sm whitespace-nowrap">Transaction History</span>
-                <ArrowRight size={16} className="ml-1" />
-              </div>
-            </div>
+            <Balance balance={balance} currency={currency} />
             
-            <div className="text-4xl font-bold text-white mt-2 mb-4 transition-all duration-300">
-              {showBalance ? `${currency}${formatter.format(balance)}` : '••••••'}
-            </div>
-            
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-4">
               <AddMoneyDialog className="bg-white text-primary rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
                 + Add Money
               </AddMoneyDialog>
