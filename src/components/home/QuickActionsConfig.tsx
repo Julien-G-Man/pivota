@@ -1,55 +1,87 @@
 
-import { CreditCard, Download, Upload, Wallet, Calendar, Globe } from 'lucide-react';
+import { 
+  Send, 
+  Building, 
+  Download, 
+  Phone, 
+  Wifi, 
+  Video, 
+  Gamepad2, 
+  Lock, 
+  Award, 
+  Megaphone, 
+  GraduationCap
+} from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 import { InternationalTransferDialog } from '@/components/transfer/InternationalTransferDialog';
 
 export const createQuickActions = (toast: (props: { title: string; description: string }) => void): ActionItem[] => [
   { 
-    name: 'Pay Bills', 
-    icon: CreditCard, 
+    name: 'To OPay', 
+    icon: Send, 
     color: 'bg-primary/10', 
-    onClick: () => toast({ title: "Pay Bills", description: "Coming soon!" })
+    onClick: () => toast({ title: "OPay Transfer", description: "Coming soon!" })
+  },
+  { 
+    name: 'To Bank', 
+    icon: Building, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "Bank Transfer", description: "Coming soon!" })
   },
   { 
     name: 'Withdraw', 
     icon: Download, 
-    color: 'bg-primary/20',
-    component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/20 hover:bg-primary/10 transition-colors">
-      <Download size={24} className="mb-2" />
-      <span className="text-xs">Withdraw</span>
-    </div>
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "Withdraw", description: "Coming soon!" })
   },
   { 
-    name: 'Top Up', 
-    icon: Upload, 
-    color: 'bg-primary/30',
-    component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/30 hover:bg-primary/10 transition-colors">
-      <Upload size={24} className="mb-2" />
-      <span className="text-xs">Top Up</span>
-    </div>
+    name: 'Airtime', 
+    icon: Phone, 
+    color: 'bg-primary/10',
+    special: true,
+    onClick: () => toast({ title: "Airtime", description: "Coming soon!" })
   },
   { 
-    name: 'Invest', 
-    icon: Wallet, 
-    color: 'bg-primary/40',
-    component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/40 hover:bg-primary/10 transition-colors">
-      <Wallet size={24} className="mb-2" />
-      <span className="text-xs">Invest</span>
-    </div>
+    name: 'Data', 
+    icon: Wifi, 
+    color: 'bg-primary/10',
+    special: true,
+    onClick: () => toast({ title: "Data Bundle", description: "Coming soon!" })
   },
   { 
-    name: 'Schedule', 
-    icon: Calendar, 
-    color: 'bg-primary/50',
-    component: <div className="flex flex-col items-center p-3 rounded-lg bg-primary/50 hover:bg-primary/10 transition-colors">
-      <Calendar size={24} className="mb-2" />
-      <span className="text-xs">Schedule</span>
-    </div>
+    name: 'Betting', 
+    icon: Gamepad2, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "Betting", description: "Coming soon!" })
   },
   { 
-    name: 'Int\'l Transfer', 
-    icon: Globe, 
-    color: 'bg-primary/70', 
-    component: <InternationalTransferDialog />
+    name: 'TV', 
+    icon: Video, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "TV Subscription", description: "Coming soon!" })
+  },
+  { 
+    name: 'Safebox', 
+    icon: Lock, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "Safebox", description: "Coming soon!" })
+  },
+  { 
+    name: 'Loan', 
+    icon: Award, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "Loan", description: "Coming soon!" })
+  },
+  { 
+    name: 'Invitation', 
+    icon: Megaphone, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "Invitation", description: "Coming soon!" })
+  },
+  { 
+    name: 'More', 
+    icon: GraduationCap, 
+    color: 'bg-primary/10',
+    onClick: () => toast({ title: "More Options", description: "Coming soon!" })
   },
 ];

@@ -1,12 +1,14 @@
 
 import React from 'react';
 import { ActionItem } from './types/QuickActionTypes';
+import { cn } from '@/lib/utils';
 
 interface QuickActionButtonProps {
   action: ActionItem;
+  special?: boolean;
 }
 
-export const QuickActionButton = ({ action }: QuickActionButtonProps) => {
+export const QuickActionButton = ({ action, special = false }: QuickActionButtonProps) => {
   if (action.component) {
     return <>{action.component}</>;
   }
@@ -14,10 +16,18 @@ export const QuickActionButton = ({ action }: QuickActionButtonProps) => {
   return (
     <button
       onClick={action.onClick}
-      className="flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 hover:bg-primary/15 transition-all"
+      className="flex flex-col items-center justify-center w-full"
     >
-      <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/20 mb-1">
+      <div className={cn(
+        "flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10 mb-1",
+        special && "relative"
+      )}>
         <action.icon size={20} className="text-primary" />
+        {special && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+            Up to 5%
+          </span>
+        )}
       </div>
       <span className="text-xs text-center">{action.name}</span>
     </button>

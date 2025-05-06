@@ -3,36 +3,26 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import TransactionItem, { TransactionType } from './TransactionItem';
 
-// Mock transaction data
+// Mock transaction data to match the image
 const mockTransactions = [
   {
     id: '1',
     type: 'send' as TransactionType,
-    title: 'John Doe',
+    title: 'Transfer to FAITH TADALA LIKUPE',
     subtitle: 'Transfer',
-    amount: 50,
-    currency: 'XAF',
-    date: new Date(2023, 3, 20, 14, 30),
+    amount: 400.00,
+    currency: '₦',
+    date: new Date(2023, 3, 28, 11, 11, 10),
     status: 'completed' as const,
   },
   {
     id: '2',
     type: 'receive' as TransactionType,
-    title: 'Sarah Smith',
-    subtitle: 'Payment',
-    amount: 120,
-    currency: 'XAF',
-    date: new Date(2023, 3, 19, 10, 15),
-    status: 'completed' as const,
-  },
-  {
-    id: '3',
-    type: 'bill' as TransactionType,
-    title: 'Electricity Bill',
-    subtitle: 'Utility Payment',
-    amount: 45,
-    currency: 'XAF',
-    date: new Date(2023, 3, 18, 9, 0),
+    title: 'OWealth Deposit(from Spend & Save)',
+    subtitle: 'Deposit',
+    amount: 250.63,
+    currency: '₦',
+    date: new Date(2023, 3, 28, 11, 7, 13),
     status: 'completed' as const,
   },
 ];
@@ -60,17 +50,17 @@ export default function RecentTransactions({ compact = false }: RecentTransactio
     : filteredTransactions;
   
   return (
-    <div>
+    <div className="bg-background rounded-xl shadow-sm">
       {!compact && (
         <>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center p-4">
             <h2 className="text-lg font-semibold">Recent Transactions</h2>
             <Button variant="ghost" size="sm" className="text-xs">
               See All
             </Button>
           </div>
           
-          <div className="flex gap-2 mb-4 overflow-x-auto py-2 scrollbar-none">
+          <div className="flex gap-2 mb-4 overflow-x-auto py-2 px-4 scrollbar-none">
             {filters.map((item) => (
               <Button
                 key={item.id}

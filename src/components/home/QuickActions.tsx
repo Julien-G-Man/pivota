@@ -8,12 +8,30 @@ export default function QuickActions() {
   const actions = createQuickActions(toast);
   
   return (
-    <div className="grid grid-cols-4 gap-4">
-      {actions.map((action) => (
-        <div key={action.name} className="flex items-center justify-center">
-          <QuickActionButton action={action} />
-        </div>
-      ))}
+    <div className="mt-4 bg-background rounded-xl p-4 shadow-sm">
+      <div className="grid grid-cols-3 gap-4 mb-4">
+        {actions.slice(0, 3).map((action) => (
+          <div key={action.name} className="flex items-center justify-center">
+            <QuickActionButton action={action} />
+          </div>
+        ))}
+      </div>
+      
+      <div className="grid grid-cols-4 gap-4 mb-4">
+        {actions.slice(3, 7).map((action) => (
+          <div key={action.name} className="flex items-center justify-center">
+            <QuickActionButton action={action} special={action.special} />
+          </div>
+        ))}
+      </div>
+      
+      <div className="grid grid-cols-4 gap-4">
+        {actions.slice(7).map((action) => (
+          <div key={action.name} className="flex items-center justify-center">
+            <QuickActionButton action={action} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

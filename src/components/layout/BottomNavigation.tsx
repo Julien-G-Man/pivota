@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, CreditCard, Wallet, History, User } from 'lucide-react';
+import { Home, Award, BarChart, CreditCard, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavigationItem {
@@ -12,10 +12,10 @@ interface NavigationItem {
 
 const navigationItems: NavigationItem[] = [
   { name: 'Home', path: '/', icon: Home },
-  { name: 'Pay', path: '/pay', icon: CreditCard },
-  { name: 'Wallet', path: '/wallet', icon: Wallet },
-  { name: 'History', path: '/history', icon: History },
-  { name: 'Profile', path: '/profile', icon: User },
+  { name: 'Rewards', path: '/rewards', icon: Award },
+  { name: 'Finance', path: '/finance', icon: BarChart },
+  { name: 'Cards', path: '/cards', icon: CreditCard },
+  { name: 'Me', path: '/profile', icon: User },
 ];
 
 export default function BottomNavigation() {
@@ -27,7 +27,10 @@ export default function BottomNavigation() {
         <Link
           key={item.name}
           to={item.path}
-          className={cn('nav-item', active === item.path && 'active')}
+          className={cn(
+            'nav-item',
+            active === item.path ? 'text-primary' : 'text-muted-foreground'
+          )}
           onClick={() => setActive(item.path)}
         >
           <item.icon size={24} />

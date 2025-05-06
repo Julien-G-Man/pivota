@@ -24,10 +24,16 @@ const iconMap = {
 };
 
 const typeColors = {
-  send: 'text-red-500 bg-red-100',
-  receive: 'text-green-600 bg-green-100',
+  send: 'text-primary bg-primary/10',
+  receive: 'text-primary bg-primary/10',
   bill: 'text-primary bg-primary/10',
-  airtime: 'text-secondary bg-secondary/20',
+  airtime: 'text-primary bg-primary/10',
+};
+
+const statusColors = {
+  completed: 'text-green-500',
+  pending: 'text-amber-500',
+  failed: 'text-red-500',
 };
 
 export default function TransactionItem({
@@ -44,9 +50,8 @@ export default function TransactionItem({
   const colorClasses = typeColors[type];
   
   const formattedAmount = new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency,
-    currencyDisplay: 'narrowSymbol',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(amount);
   
   const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -54,46 +59,33 @@ export default function TransactionItem({
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    hour12: true,
+    second: 'numeric',
+    hour12: false,
   }).format(date);
   
   return (
-    <div className={cn(
-      "flex items-center p-4 border-b border-border/50 hover:bg-muted/30 transition-colors",
-      compact && "py-3"
-    )}>
+    <div className="flex items-center p-4 bg-background hover:bg-muted/10 transition-colors">
       <div className={cn('p-3 mr-3 rounded-full flex items-center justify-center', colorClasses)}>
         <Icon size={compact ? 16 : 18} />
       </div>
       
       <div className="flex-1 min-w-0">
         <div className="font-medium text-sm truncate">{title}</div>
-        <div className={cn(
-          "text-xs text-muted-foreground flex items-center gap-1",
-          compact && "hidden"
-        )}>
-          <span>{subtitle}</span>
-          <span className="inline-block w-1 h-1 rounded-full bg-muted-foreground mx-1"></span>
-          <span>{formattedDate}</span>
+        <div className="text-xs text-muted-foreground">
+          {formattedDate}
         </div>
-        {compact && (
-          <div className="text-xs text-muted-foreground">{formattedDate}</div>
-        )}
       </div>
       
-      <div className={cn('text-right', {
-        'text-red-500': type === 'send',
-        'text-green-600': type === 'receive',
-      })}>
-        <div className={cn("font-medium", compact ? "text-sm" : "text-base")}>
-          {type === 'send' ? '-' : '+'}{formattedAmount}
-        </div>
-        <div className={cn('text-xs', {
-          'text-green-600': status === 'completed',
-          'text-amber-500': status === 'pending',
-          'text-red-500': status === 'failed',
+      <div className="text-right">
+        <div className={cn("font-medium text-sm", {
+          'text-black': type === 'send',
         })}>
-          {status.charAt(0).toUpperCase() + status.slice(1)}
+          {type === 'send' ? '-' : ''}{currency}{formattedAmount}
+        </div>
+        <div className={cn('text-xs px-2 py-1 rounded-lg bg-green-100', 
+          statusColors[status]
+        )}>
+          Successful
         </div>
       </div>
     </div>
