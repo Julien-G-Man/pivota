@@ -99,8 +99,11 @@ const Index = () => {
             <Balance balance={balance} currency={currency} />
             
             <div className="flex justify-end mt-4">
-              <AddMoneyDialog className="bg-white text-primary rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
-                + Add Money
+              {/* Fix: Instead of passing children directly, use the trigger prop or follow the component's API */}
+              <AddMoneyDialog>
+                <Button className="bg-white text-primary rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
+                  + Add Money
+                </Button>
               </AddMoneyDialog>
             </div>
           </div>
