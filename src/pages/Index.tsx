@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Bell, Headset, Eye, EyeOff, ArrowRight, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -13,16 +14,11 @@ import Balance from '@/components/home/Balance';
 
 const Index = () => {
   const { toast } = useToast();
-  const [balance] = useState(250000);
-  const [currency] = useState('F');
+  const [balance] = useState(15000000.00);
+  const [currency] = useState('FCFA');
   const [userName] = useState('Julien Gman');
   const [showBalance, setShowBalance] = useState(true);
   
-  const formatter = new Intl.NumberFormat(undefined, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-
   const handleSupportClick = () => {
     toast({
       title: "Help",
@@ -52,7 +48,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-background pb-20">
       <div className="container max-w-md mx-auto p-4">
         {/* Header with user info */}
         <div className="flex items-center justify-between mb-6">
@@ -94,12 +90,12 @@ const Index = () => {
         
         {/* Main balance card with blue gradient */}
         <Card className="mt-4 overflow-hidden border-none shadow-lg rounded-xl">
-          <div className="bg-gradient-to-br from-primary to-primary/70 text-white p-4">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-4">
             <Balance balance={balance} currency={currency} />
             
             <div className="flex justify-end mt-4">
               <AddMoneyDialog>
-                <Button className="bg-white text-primary rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
+                <Button className="bg-white text-blue-600 rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
                   + Add Money
                 </Button>
               </AddMoneyDialog>
@@ -116,7 +112,7 @@ const Index = () => {
         <QuickActions />
         
         {/* Promotion Banner */}
-        <div className="mt-4 bg-background rounded-xl p-4 shadow-sm border border-muted flex items-center">
+        <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 shadow-sm border border-blue-100 flex items-center">
           <div className="h-12 w-12 rounded-full bg-black flex-shrink-0 mr-3 overflow-hidden">
             <img 
               src="/lovable-uploads/4e1ce3d6-16e7-4833-8039-40fdcae7ce29.png" 
@@ -130,7 +126,7 @@ const Index = () => {
           </div>
           <Button 
             onClick={() => toast({ title: "Promotion", description: "Promotion details coming soon!" })}
-            className="bg-primary text-white rounded-full px-3 py-1 text-xs"
+            className="bg-blue-600 text-white rounded-full px-3 py-1 text-xs"
           >
             Click for Security
           </Button>
@@ -140,7 +136,7 @@ const Index = () => {
         <div className="fixed bottom-24 right-4">
           <button
             onClick={handleSecurityClick}
-            className="h-14 w-14 rounded-full bg-primary flex items-center justify-center shadow-lg"
+            className="h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center shadow-lg"
           >
             <Shield size={24} className="text-white" />
           </button>

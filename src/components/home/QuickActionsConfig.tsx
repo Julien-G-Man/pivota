@@ -1,118 +1,105 @@
 
-import { 
-  Send, 
-  Building, 
-  Download, 
-  Phone, 
-  Wifi, 
-  Video, 
-  Gamepad2, 
-  Lock, 
-  Award, 
-  Megaphone, 
-  GraduationCap,
-  UserRound,
-  QrCode,
-  LineChart,
-  PiggyBank
+import { useNavigate } from 'react-router-dom';
+import {
+  Send,
+  Wallet,
+  CreditCard,
+  Receipt,
+  Phone,
+  Wifi,
+  Smartphone,
+  Bolt,
+  Heart,
+  Gift,
+  Library,
+  Building,
+  PiggyBank,
+  BadgeDollarSign,
+  ArrowUpRight,
+  ShoppingCart,
+  Plus,
+  Landmark
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
+import { TransferDialog } from '../transfer/TransferDialog';
+import { AddMoneyDialog } from '../transfer/AddMoneyDialog';
+import { InternationalTransferDialog } from '../transfer/InternationalTransferDialog';
 
-export const createQuickActions = (toast: (props: { title: string; description: string }) => void): ActionItem[] => {
-  return [
-    { 
-      name: 'To Friend', 
-      icon: UserRound, 
-      color: 'bg-primary/10', 
-      onClick: () => window.location.href = '/transfer/p2p'
+export const createQuickActions = (toast: any) => {
+  const navigate = useNavigate();
+  
+  const actions: ActionItem[] = [
+    {
+      name: 'Send',
+      icon: Send,
+      component: <TransferDialog />
     },
-    { 
-      name: 'To Pivota', 
-      icon: Send, 
-      color: 'bg-primary/10', 
-      onClick: () => window.location.href = '/transfer/pivota'
+    {
+      name: 'Request',
+      icon: ArrowUpRight,
+      onClick: () => navigate('/transfer/p2p')
     },
-    { 
-      name: 'To Bank', 
-      icon: Building, 
-      color: 'bg-primary/10',
-      onClick: () => window.location.href = '/transfer/bank'
+    {
+      name: 'P2P',
+      icon: Wallet,
+      onClick: () => navigate('/transfer/p2p')
     },
-    { 
-      name: 'Invest', 
-      icon: LineChart, 
-      color: 'bg-primary/10',
+    {
+      name: 'Invest',
+      icon: Landmark,
+      onClick: () => navigate('/invest')
+    },
+    {
+      name: 'Deposit',
+      icon: PiggyBank,
+      component: <AddMoneyDialog />
+    },
+    {
+      name: 'Withdraw',
+      icon: BadgeDollarSign,
+      onClick: () => toast({
+        title: "Withdrawal",
+        description: "Withdrawal feature coming soon!"
+      })
+    },
+    {
+      name: 'Card',
+      icon: CreditCard,
+      onClick: () => navigate('/cards')
+    },
+    {
+      name: 'History',
+      icon: Receipt,
+      onClick: () => navigate('/history')
+    },
+    {
+      name: 'Airtime',
+      icon: Phone,
+      onClick: () => navigate('/airtime')
+    },
+    {
+      name: 'Internet',
+      icon: Wifi,
+      onClick: () => navigate('/data')
+    },
+    {
+      name: 'TV',
+      icon: Smartphone,
       special: true,
-      onClick: () => toast({ title: "Invest", description: "Investment options coming soon!" })
+      onClick: () => toast({
+        title: "TV Subscriptions",
+        description: "TV subscription feature coming soon!"
+      })
     },
-    { 
-      name: 'Deposit', 
-      icon: PiggyBank, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "Deposit", description: "Deposit options coming soon!" })
-    },
-    { 
-      name: 'Withdraw', 
-      icon: Download, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "Withdraw", description: "Coming soon!" })
-    },
-    { 
-      name: 'Scan QR', 
-      icon: QrCode, 
-      color: 'bg-primary/10',
-      special: true,
-      onClick: () => toast({ title: "QR Scanner", description: "QR scanning will be available soon!" })
-    },
-    { 
-      name: 'Airtime', 
-      icon: Phone, 
-      color: 'bg-primary/10',
-      special: true,
-      onClick: () => window.location.href = '/airtime'
-    },
-    { 
-      name: 'Data', 
-      icon: Wifi, 
-      color: 'bg-primary/10',
-      special: true,
-      onClick: () => window.location.href = '/data'
-    },
-    { 
-      name: 'Betting', 
-      icon: Gamepad2, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "Betting", description: "Coming soon!" })
-    },
-    { 
-      name: 'TV', 
-      icon: Video, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "TV Subscription", description: "Coming soon!" })
-    },
-    { 
-      name: 'Safebox', 
-      icon: Lock, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "Safebox", description: "Coming soon!" })
-    },
-    { 
-      name: 'Loan', 
-      icon: Award, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "Loan", description: "Coming soon!" })
-    },
-    { 
-      name: 'Invitation', 
-      icon: Megaphone, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "Invitation", description: "Coming soon!" })
-    },
-    { 
-      name: 'More', 
-      icon: GraduationCap, 
-      color: 'bg-primary/10',
-      onClick: () => toast({ title: "More Options", description: "Coming soon!" })
-    },
+    {
+      name: 'Utilities',
+      icon: Bolt,
+      onClick: () => toast({
+        title: "Utilities",
+        description: "Utilities payment feature coming soon!"
+      })
+    }
   ];
+
+  return actions;
 };

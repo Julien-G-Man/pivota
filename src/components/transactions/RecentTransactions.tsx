@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import TransactionItem, { TransactionType } from './TransactionItem';
 
-// Mock transaction data to match the image
+// Mock transaction data with updated currency format
 const mockTransactions = [
   {
     id: '1',
@@ -50,7 +50,7 @@ export default function RecentTransactions({ compact = false }: RecentTransactio
     : filteredTransactions;
   
   return (
-    <div className="bg-background rounded-xl shadow-sm">
+    <div className="bg-gradient-to-b from-white to-blue-50 rounded-xl shadow-sm">
       {!compact && (
         <>
           <div className="flex justify-between items-center p-4">

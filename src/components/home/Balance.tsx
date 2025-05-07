@@ -13,12 +13,14 @@ export default function Balance({ balance, currency, className }: BalanceProps) 
   const [showBalance, setShowBalance] = useState(true);
   
   const formatter = new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: 'XAF',
-    currencyDisplay: 'narrowSymbol',
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: true,
   });
   
-  const formattedBalance = formatter.format(balance).replace('XAF', currency);
+  // Format as "15,000,000.00 FCFA" instead of "FCFA 15,000,000.00"
+  const formattedBalance = `${formatter.format(balance)} ${currency}`;
   
   return (
     <div className={cn('flex flex-col items-center', className)}>

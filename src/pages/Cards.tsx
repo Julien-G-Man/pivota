@@ -34,7 +34,7 @@ const Cards = () => {
       expiryYear: '26',
       color: 'from-blue-700 to-blue-950',
       frozen: false,
-      holderName: 'FIRSTNAME SURNAME',
+      holderName: 'JULIEN GLORY MANANA',
       cvv: '123'
     },
     {
@@ -45,7 +45,7 @@ const Cards = () => {
       expiryYear: '27',
       color: 'from-purple-700 to-indigo-950',
       frozen: false,
-      holderName: 'FIRSTNAME SURNAME',
+      holderName: 'JULIEN GLORY MANANA',
       cvv: '456'
     },
   ]);
@@ -74,7 +74,7 @@ const Cards = () => {
   };
   
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background pb-20">
       <div className="container max-w-md mx-auto p-4">
         <PivotaHeader title="Cards" />
         
@@ -110,7 +110,11 @@ const Cards = () => {
                         <h3 className="text-xl font-bold">PIVOTA</h3>
                       </div>
                       <div className="h-12 w-12 rounded-full flex items-center justify-center">
-                        <div className="h-10 w-10 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm" />
+                        <img 
+                          src="/lovable-uploads/cac4f9d6-8128-47ae-98fe-075b3cd23075.png"
+                          alt="Pivota Logo" 
+                          className="h-10 w-10 object-contain"
+                        />
                       </div>
                     </div>
                     
@@ -132,7 +136,7 @@ const Cards = () => {
                   </div>
                   
                   <Card className="mt-3">
-                    <CardContent className="p-4">
+                    <CardContent className="p-4 bg-gradient-to-b from-white to-gray-50">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
                           <Lock size={18} />
@@ -185,7 +189,7 @@ const Cards = () => {
               
               <Button 
                 onClick={handleAddCard}
-                className="bg-primary text-white flex items-center gap-2"
+                className="bg-blue-600 text-white flex items-center gap-2"
               >
                 <Plus size={18} />
                 Request New Card
@@ -204,7 +208,7 @@ const Cards = () => {
               </p>
               <Button 
                 onClick={handleAddCard}
-                className="bg-primary text-white flex items-center gap-2"
+                className="bg-blue-600 text-white flex items-center gap-2"
               >
                 <Plus size={18} />
                 Create Virtual Card
@@ -214,11 +218,11 @@ const Cards = () => {
         </Tabs>
         
         <Card>
-          <CardContent className="p-4">
+          <CardContent className="p-4 bg-gradient-to-b from-white to-gray-50">
             <h4 className="font-semibold mb-3">Card Benefits</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
-                <div className="p-2 bg-primary/10 rounded-full text-primary mt-0.5">
+                <div className="p-2 bg-blue-100 rounded-full text-blue-600 mt-0.5">
                   <ShieldCheck size={16} />
                 </div>
                 <div>
@@ -227,7 +231,7 @@ const Cards = () => {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <div className="p-2 bg-primary/10 rounded-full text-primary mt-0.5">
+                <div className="p-2 bg-blue-100 rounded-full text-blue-600 mt-0.5">
                   <Globe size={16} />
                 </div>
                 <div>
@@ -236,7 +240,7 @@ const Cards = () => {
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <div className="p-2 bg-primary/10 rounded-full text-primary mt-0.5">
+                <div className="p-2 bg-blue-100 rounded-full text-blue-600 mt-0.5">
                   <ShoppingCart size={16} />
                 </div>
                 <div>

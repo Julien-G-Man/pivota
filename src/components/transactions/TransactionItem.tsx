@@ -54,6 +54,9 @@ export default function TransactionItem({
     maximumFractionDigits: 2,
   }).format(amount);
   
+  // Format as "400.00 F" instead of "F 400.00"
+  const displayAmount = `${formattedAmount} ${currency}`;
+  
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',
@@ -80,7 +83,7 @@ export default function TransactionItem({
         <div className={cn("font-medium text-sm", {
           'text-black': type === 'send',
         })}>
-          {type === 'send' ? '-' : ''}{currency}{formattedAmount}
+          {type === 'send' ? '-' : ''}{displayAmount}
         </div>
         <div className={cn('text-xs px-2 py-1 rounded-lg bg-green-100', 
           statusColors[status]
