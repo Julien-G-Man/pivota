@@ -18,7 +18,8 @@ import {
   ArrowUpRight,
   ShoppingCart,
   Plus,
-  Landmark
+  Landmark,
+  Bot
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 import { TransferDialog } from '../transfer/TransferDialog';
@@ -38,7 +39,7 @@ export const createQuickActions = (toast: any) => {
       name: 'To MOMO',
       icon: Phone,
       color: 'text-primary',
-      onClick: () => navigate('/transfer/p2p')
+      onClick: () => navigate('/transfer/momo')
     },
     {
       name: 'To Bank',
@@ -103,6 +104,12 @@ export const createQuickActions = (toast: any) => {
         title: "Utilities",
         description: "Utilities payment feature coming soon!"
       })
+    },
+    {
+      name: 'AI Advisor',
+      icon: Bot,
+      color: 'text-primary',
+      onClick: () => navigate('/invest')
     }
   ];
 
