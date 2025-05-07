@@ -22,7 +22,6 @@ import {
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 import { TransferDialog } from '../transfer/TransferDialog';
-import { AddMoneyDialog } from '../transfer/AddMoneyDialog';
 import { InternationalTransferDialog } from '../transfer/InternationalTransferDialog';
 
 export const createQuickActions = (toast: any) => {
@@ -66,13 +65,7 @@ export const createQuickActions = (toast: any) => {
       name: 'Deposit',
       icon: PiggyBank,
       color: 'text-primary',
-      component: <AddMoneyDialog />
-    },
-    {
-      name: 'Card',
-      icon: CreditCard,
-      color: 'text-primary',
-      onClick: () => navigate('/cards')
+      onClick: () => navigate('/deposit')
     },
     {
       name: 'History',

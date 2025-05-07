@@ -1,174 +1,147 @@
 
 import { useState } from 'react';
-import { Gift, Star, Clock, ChevronRight } from 'lucide-react';
-import BottomNavigation from '@/components/layout/BottomNavigation';
+import { ArrowRight, Gift, Share2, CopyIcon, CheckIcon, Award } from 'lucide-react';
 import PivotaHeader from '@/components/common/PivotaHeader';
-import { Card, CardContent } from '@/components/ui/card';
+import BottomNavigation from '@/components/layout/BottomNavigation';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 
 const Rewards = () => {
   const { toast } = useToast();
-  const [points] = useState(3250);
-  const [tier] = useState('Gold');
-  const [nextTier] = useState('Platinum');
-  const [nextTierPoints] = useState(5000);
+  const [isCopied, setIsCopied] = useState(false);
+  const referralCode = "PIVOTA2025";
   
-  const handleRedeemReward = (name: string) => {
+  const handleCopyReferral = () => {
+    navigator.clipboard.writeText(referralCode);
+    setIsCopied(true);
     toast({
-      title: "Reward Selected",
-      description: `You've selected ${name}. Processing your reward...`,
+      title: "Referral Code Copied",
+      description: "Your referral code has been copied to clipboard",
     });
+    setTimeout(() => setIsCopied(false), 2000);
   };
-  
+
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-background pb-20">
       <div className="container max-w-md mx-auto p-4">
-        <PivotaHeader title="Rewards" />
+        <PivotaHeader title="Rewards & Benefits" />
         
-        <Card className="mb-6 overflow-hidden">
-          <div className="bg-gradient-to-br from-yellow-500 to-amber-700 text-white p-6">
-            <div className="flex justify-between items-start mb-4">
+        {/* Points Overview */}
+        <Card className="mb-4 overflow-hidden border-none shadow-lg">
+          <div className="bg-gradient-to-r from-blue-700 to-blue-600 px-6 py-5 text-white">
+            <h2 className="text-xl font-bold mb-1">Pivota Rewards</h2>
+            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-white/80">Current Tier</p>
-                <h2 className="text-2xl font-bold flex items-center gap-1">
-                  {tier}
-                  <Star size={18} fill="white" />
-                </h2>
+                <p className="text-sm opacity-80">Your points balance</p>
+                <p className="text-3xl font-bold">1,250</p>
               </div>
-              <div className="p-2 bg-white/20 rounded-full">
-                <Gift size={24} />
+              <div className="h-16 w-16 bg-white/20 rounded-full flex items-center justify-center">
+                <Gift size={28} className="text-white" />
               </div>
             </div>
-            
-            <div className="mb-1 flex justify-between text-sm">
-              <span>Pivota Points</span>
-              <span>{points} / {nextTierPoints}</span>
-            </div>
-            
-            <Progress value={(points / nextTierPoints) * 100} className="h-2 mb-2" />
-            
-            <p className="text-sm">
-              You need {nextTierPoints - points} more points to reach {nextTier}
-            </p>
           </div>
+          <CardContent className="p-4 bg-white">
+            <div className="mb-3">
+              <div className="flex justify-between mb-1 items-center">
+                <p className="text-sm">Tier progress</p>
+                <Badge variant="outline" className="bg-blue-50">Silver</Badge>
+              </div>
+              <Progress value={65} className="h-2 bg-blue-100" />
+            </div>
+            <p className="text-xs text-muted-foreground">750 more points to reach Gold tier</p>
+          </CardContent>
         </Card>
         
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">Available Rewards</h3>
-          <Button variant="ghost" size="sm">
-            History <ChevronRight size={16} />
-          </Button>
-        </div>
+        {/* Referral Program */}
+        <Card className="mb-4">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Share2 size={18} className="text-blue-600" />
+              <span>Refer a Friend</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-4">
+              Invite your friends to Pivota and earn 5,000 points (approx. 5,000 FCFA) for each friend who signs up and makes a transaction.
+            </p>
+            <div className="flex items-center justify-between p-3 border rounded-lg mb-4">
+              <p className="font-medium">{referralCode}</p>
+              <Button variant="outline" size="sm" onClick={handleCopyReferral}>
+                {isCopied ? <CheckIcon size={16} /> : <CopyIcon size={16} />}
+                <span className="ml-1">{isCopied ? 'Copied' : 'Copy'}</span>
+              </Button>
+            </div>
+            <Button className="w-full bg-blue-600 hover:bg-blue-700">
+              Share Your Invite Link <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </CardContent>
+        </Card>
         
-        <div className="space-y-4 mb-6">
-          <Card className="overflow-hidden">
-            <div className="relative">
-              <img 
-                src="https://api.dicebear.com/7.x/shapes/svg?seed=reward1" 
-                alt="Airtime Reward" 
-                className="w-full h-32 object-cover bg-gradient-to-r from-blue-500 to-purple-500"
-              />
-              <div className="absolute top-3 right-3 bg-primary text-white text-xs px-2 py-1 rounded">
-                2000 Points
+        {/* Referral Bonus */}
+        <Card className="mb-4 border-blue-200 bg-blue-50/50">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2">
+              <Award size={18} className="text-blue-600" />
+              <span>Referral Bonus</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-3">
+              Get additional rewards when your referred friends remain active on Pivota!
+            </p>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-blue-100">
+                <div>
+                  <h4 className="font-medium text-sm">3 Active Referrals</h4>
+                  <p className="text-xs text-muted-foreground">Cash bonus: 15,000 FCFA</p>
+                </div>
+                <Badge variant="outline" className="bg-green-100 text-green-700 border-green-200">
+                  In Progress
+                </Badge>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-white rounded-lg border border-blue-100">
+                <div>
+                  <h4 className="font-medium text-sm">10 Active Referrals</h4>
+                  <p className="text-xs text-muted-foreground">Cash bonus: 50,000 FCFA</p>
+                </div>
+                <Badge variant="outline" className="bg-blue-100 text-blue-700 border-blue-200">
+                  Milestone
+                </Badge>
               </div>
             </div>
-            <CardContent className="p-4">
-              <h4 className="font-semibold text-lg mb-1">Free Airtime</h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Get 5,000 F free airtime for any network of your choice.
-              </p>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center text-xs text-muted-foreground">
-                  <Clock size={14} className="mr-1" />
-                  Expires in 30 days
-                </div>
-                <Button size="sm" onClick={() => handleRedeemReward("Free Airtime")}>
-                  Redeem
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="overflow-hidden">
-            <div className="relative">
-              <img 
-                src="https://api.dicebear.com/7.x/shapes/svg?seed=reward2" 
-                alt="Data Bundle Reward" 
-                className="w-full h-32 object-cover bg-gradient-to-r from-green-500 to-teal-500"
-              />
-              <div className="absolute top-3 right-3 bg-primary text-white text-xs px-2 py-1 rounded">
-                3500 Points
-              </div>
-            </div>
-            <CardContent className="p-4">
-              <h4 className="font-semibold text-lg mb-1">Data Bundle</h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Get a 10GB data bundle for any network of your choice.
-              </p>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center text-xs text-muted-foreground">
-                  <Clock size={14} className="mr-1" />
-                  Expires in 45 days
-                </div>
-                <Button size="sm" onClick={() => handleRedeemReward("Data Bundle")}>
-                  Redeem
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="overflow-hidden">
-            <div className="relative">
-              <img 
-                src="https://api.dicebear.com/7.x/shapes/svg?seed=reward3" 
-                alt="Cashback Reward" 
-                className="w-full h-32 object-cover bg-gradient-to-r from-amber-500 to-orange-500"
-              />
-              <div className="absolute top-3 right-3 bg-primary text-white text-xs px-2 py-1 rounded">
-                5000 Points
-              </div>
-            </div>
-            <CardContent className="p-4">
-              <h4 className="font-semibold text-lg mb-1">Cashback Reward</h4>
-              <p className="text-sm text-muted-foreground mb-3">
-                Get 10,000 F cashback on your next transaction over 100,000 F.
-              </p>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center text-xs text-muted-foreground">
-                  <Clock size={14} className="mr-1" />
-                  Expires in 60 days
-                </div>
-                <Button size="sm" onClick={() => handleRedeemReward("Cashback Reward")}>
-                  Redeem
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          </CardContent>
+        </Card>
         
-        <Card>
-          <CardContent className="p-4">
-            <h4 className="font-semibold mb-3">How to Earn Points</h4>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary">1</div>
-                <span>Spend 10,000 F to earn 50 points</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary">2</div>
-                <span>Refer a friend to earn 500 points</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary">3</div>
-                <span>Complete your profile to earn 200 points</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary">4</div>
-                <span>Make 5 transactions weekly to earn 100 bonus points</span>
-              </li>
-            </ul>
+        {/* Benefits */}
+        <Card className="mb-4">
+          <CardHeader>
+            <CardTitle>Your Benefits</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <h3 className="font-medium">Free Transfers</h3>
+                <p className="text-xs text-muted-foreground">3 remaining this month</p>
+              </div>
+              <Button variant="outline" size="sm">Use</Button>
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <h3 className="font-medium">Cashback</h3>
+                <p className="text-xs text-muted-foreground">1% on all transactions</p>
+              </div>
+              <Button variant="outline" size="sm">View</Button>
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <h3 className="font-medium">Birthday Bonus</h3>
+                <p className="text-xs text-muted-foreground">5,000 FCFA in 45 days</p>
+              </div>
+              <Button variant="outline" size="sm">Info</Button>
+            </div>
           </CardContent>
         </Card>
       </div>

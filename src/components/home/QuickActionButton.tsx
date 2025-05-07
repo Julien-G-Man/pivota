@@ -22,7 +22,7 @@ export const QuickActionButton = ({ action, special = false }: QuickActionButton
         "flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10 mb-1",
         special && "relative"
       )}>
-        <action.icon size={20} className={cn("text-primary", action.color)} />
+        <action.icon size={20} className="text-primary" />
         {special && (
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
             Up to 5%

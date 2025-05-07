@@ -17,16 +17,16 @@ export default function QuickActions() {
         ))}
       </div>
       
-      <div className="grid grid-cols-4 gap-4 mb-4">
-        {actions.slice(3, 7).map((action) => (
+      <div className="grid grid-cols-3 gap-4 mb-4">
+        {actions.slice(3, 6).map((action) => (
           <div key={action.name} className="flex items-center justify-center">
             <QuickActionButton action={action} special={action.special} />
           </div>
         ))}
       </div>
       
-      <div className="grid grid-cols-4 gap-4">
-        {actions.slice(7).map((action) => (
+      <div className="grid grid-cols-5 gap-4">
+        {actions.slice(6).map((action) => (
           <div key={action.name} className="flex items-center justify-center">
             <QuickActionButton action={action} />
           </div>

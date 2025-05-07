@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Send, QrCode, Lightbulb, Languages, BarChart3, MessageSquare, UserRound } from 'lucide-react';
+import { ArrowLeft, Send, MessageCircle, Lightbulb, Languages, BarChart3, UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 
 interface Message {
@@ -327,7 +326,7 @@ const Support = () => {
           
           <Avatar className="h-10 w-10 border border-primary/20">
             <AvatarImage src="https://api.dicebear.com/7.x/bottts/svg?seed=Mona" />
-            <AvatarFallback>M</AvatarFallback>
+            <AvatarFallback><MessageCircle className="text-primary" /></AvatarFallback>
           </Avatar>
         </div>
         
@@ -383,7 +382,7 @@ const Support = () => {
               {message.sender === 'bot' && (
                 <Avatar className="h-8 w-8 mr-2 flex-shrink-0">
                   <AvatarImage src="https://api.dicebear.com/7.x/bottts/svg?seed=Mona" />
-                  <AvatarFallback>M</AvatarFallback>
+                  <AvatarFallback><MessageCircle className="text-primary" /></AvatarFallback>
                 </Avatar>
               )}
               
@@ -425,7 +424,7 @@ const Support = () => {
                     ? "A customer support agent will be with you shortly. Average wait time: 2 minutes."
                     : activeLanguage === 'fr'
                     ? "Un agent de support client sera avec vous sous peu. Temps d'attente moyen: 2 minutes."
-                    : "Moto ya support akoya kosolola na yo sima ya mwa ntango moke. Temps d'attente: miniti 2."}
+                    : "Moto ya support akoya sikoyo. Temps d'attente: miniti 2."}
                 </p>
                 <div className="flex items-center justify-center w-full space-x-2">
                   <Button variant="outline" onClick={handleCloseHumanSupport}>

@@ -53,7 +53,7 @@ const InvestmentAdvisor = () => {
         response = 'Based on your financial profile, I recommend exploring government bonds for stability and selected tech stocks for growth. Would you like me to provide specific investment options based on your risk tolerance?';
       }
       
-      setChatMessages([...chatMessages, { sender: 'user', text: chatInput }, { sender: 'bot', text: response }]);
+      setChatMessages((prev) => [...prev, { sender: 'bot', text: response }]);
     }, 1000);
     
     setChatInput('');
@@ -204,9 +204,9 @@ const InvestmentAdvisor = () => {
               <CardHeader className="bg-gradient-to-r from-blue-700 to-blue-600 text-white">
                 <div className="flex items-center space-x-3">
                   <Avatar className="h-10 w-10 border-2 border-white/20 bg-blue-300">
-                    <AvatarImage src="/lovable-uploads/cac4f9d6-8128-47ae-98fe-075b3cd23075.png" />
+                    <AvatarImage src="https://api.dicebear.com/7.x/bottts/svg?seed=Mona" />
                     <AvatarFallback>
-                      <UserRound className="text-blue-700" />
+                      <MessageCircle className="text-blue-700" />
                     </AvatarFallback>
                   </Avatar>
                   <div>
