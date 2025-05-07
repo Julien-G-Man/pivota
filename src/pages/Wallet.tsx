@@ -77,7 +77,7 @@ const Wallet = () => {
         
         <Button 
           onClick={handleAddPaymentMethod}
-          className="w-full mb-6 bg-pivota-purple hover:bg-pivota-purple-dark flex items-center justify-center gap-2"
+          className="w-full mb-6 bg-primary hover:bg-primary-dark flex items-center justify-center gap-2"
         >
           <Plus size={18} />
           Add Payment Method
@@ -93,9 +93,9 @@ const Wallet = () => {
           {Object.entries(paymentMethods).map(([key, methods]) => (
             <TabsContent key={key} value={key} className="mt-0 space-y-4">
               {methods.map((method) => (
-                <Card key={method.id} className={`relative overflow-hidden ${method.isDefault ? 'border-pivota-purple border-2' : ''}`}>
+                <Card key={method.id} className={`relative overflow-hidden ${method.isDefault ? 'border-primary border-2' : ''}`}>
                   {method.isDefault && (
-                    <div className="absolute top-0 right-0 bg-pivota-purple text-white text-xs py-1 px-3 rounded-bl-md">
+                    <div className="absolute top-0 right-0 bg-primary text-white text-xs py-1 px-3 rounded-bl-md">
                       Default
                     </div>
                   )}

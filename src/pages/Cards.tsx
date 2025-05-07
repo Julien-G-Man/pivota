@@ -17,6 +17,8 @@ interface CardDetails {
   expiryYear: string;
   color: string;
   frozen: boolean;
+  holderName: string;
+  cvv: string;
 }
 
 const Cards = () => {
@@ -27,20 +29,24 @@ const Cards = () => {
     {
       id: '1',
       type: 'Visa',
-      number: '•••• •••• •••• 4582',
+      number: '5489 7452 8645 1278',
       expiryMonth: '12',
       expiryYear: '26',
-      color: 'from-blue-600 to-blue-800',
+      color: 'from-blue-700 to-blue-950',
       frozen: false,
+      holderName: 'FIRSTNAME SURNAME',
+      cvv: '123'
     },
     {
       id: '2',
       type: 'Mastercard',
-      number: '•••• •••• •••• 7891',
+      number: '4568 7891 2345 6789',
       expiryMonth: '06',
       expiryYear: '27',
-      color: 'from-purple-600 to-indigo-800',
+      color: 'from-purple-700 to-indigo-950',
       frozen: false,
+      holderName: 'FIRSTNAME SURNAME',
+      cvv: '456'
     },
   ]);
   
@@ -82,9 +88,9 @@ const Cards = () => {
             <div className="flex flex-col gap-6">
               {cards.map((card) => (
                 <div key={card.id} className="relative">
-                  <div className={`bg-gradient-to-r ${card.color} text-white rounded-xl p-5 h-48 relative overflow-hidden`}>
+                  <div className={`bg-gradient-to-br ${card.color} text-white rounded-xl p-5 h-52 relative overflow-hidden shadow-lg border border-white/10 flex flex-col justify-between`}>
                     {card.frozen && (
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
                         <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg text-center">
                           <Lock size={24} className="mx-auto mb-2" />
                           <p className="font-bold">Card Frozen</p>
@@ -92,33 +98,36 @@ const Cards = () => {
                       </div>
                     )}
                     
-                    <div className="flex justify-between items-start">
+                    {/* Card background decorative elements */}
+                    <div className="absolute inset-0 overflow-hidden">
+                      <div className="absolute w-[300px] h-[300px] rounded-full bg-white/5 -right-20 -top-32" />
+                      <div className="absolute w-[200px] h-[200px] rounded-full bg-white/5 right-20 top-20" />
+                      <div className="absolute w-[250px] h-[250px] rounded-full bg-white/5 -left-40 -bottom-20" />
+                    </div>
+                    
+                    <div className="flex justify-between items-start z-10">
                       <div className="space-y-4">
-                        <div>
-                          <p className="text-xs text-white/70">Pivota</p>
-                          <h3 className="text-lg font-bold">{card.type} Card</h3>
-                        </div>
-                        
-                        <div>
-                          <p className="text-xs text-white/70 mb-1">Card Number</p>
-                          <p className="font-mono text-lg">{card.number}</p>
-                        </div>
+                        <h3 className="text-xl font-bold">PIVOTA</h3>
                       </div>
-                      <div className="h-12 w-12 bg-white/20 rounded-full flex items-center justify-center">
-                        {card.type === 'Visa' ? (
-                          <span className="text-xl font-bold italic">VISA</span>
-                        ) : (
-                          <span className="text-xl font-bold">MC</span>
-                        )}
+                      <div className="h-12 w-12 rounded-full flex items-center justify-center">
+                        <div className="h-10 w-10 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm" />
                       </div>
                     </div>
                     
-                    <div className="absolute bottom-5 left-5 right-5 flex justify-between items-center">
+                    <div className="z-10 my-4">
+                      <div className="w-9 h-7 bg-gradient-to-br from-amber-300 to-yellow-600 rounded-md mb-2 overflow-hidden" />
+                      <p className="font-mono text-xl tracking-wider">{card.number}</p>
+                    </div>
+                    
+                    <div className="flex justify-between items-end z-10">
                       <div>
-                        <p className="text-xs text-white/70">Valid Thru</p>
-                        <p>{card.expiryMonth}/{card.expiryYear}</p>
+                        <p className="text-xs text-white/70">CARD HOLDER</p>
+                        <p className="font-mono tracking-wider">{card.holderName}</p>
                       </div>
-                      <div className="h-8 w-8 bg-white/10 rounded-full"></div>
+                      <div>
+                        <p className="text-xs text-white/70">EXPIRES</p>
+                        <p className="font-mono tracking-wider">{card.expiryMonth}/{card.expiryYear}</p>
+                      </div>
                     </div>
                   </div>
                   
