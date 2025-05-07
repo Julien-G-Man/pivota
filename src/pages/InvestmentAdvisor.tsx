@@ -17,7 +17,7 @@ const InvestmentAdvisor = () => {
   const [chatMessages, setChatMessages] = useState([
     {
       sender: 'bot',
-      text: 'Hello! I'm Mona, your AI financial advisor. Based on your spending habits and market trends, I can provide personalized investment advice.'
+      text: "Hello! I'm Mona, your AI financial advisor. Based on your spending habits and market trends, I can provide personalized investment advice."
     },
     {
       sender: 'bot',
