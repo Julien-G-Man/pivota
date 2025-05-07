@@ -30,72 +30,72 @@ export const createQuickActions = (toast: any) => {
   
   const actions: ActionItem[] = [
     {
-      name: 'Send',
+      name: 'To a Friend',
       icon: Send,
-      color: 'text-blue-500',
+      color: 'text-primary',
       component: <TransferDialog />
     },
     {
-      name: 'Request',
-      icon: ArrowUpRight,
-      color: 'text-green-500',
+      name: 'To MOMO',
+      icon: Phone,
+      color: 'text-primary',
       onClick: () => navigate('/transfer/p2p')
     },
     {
-      name: 'P2P',
+      name: 'To Bank',
       icon: Wallet,
-      color: 'text-purple-500',
-      onClick: () => navigate('/transfer/p2p')
+      color: 'text-primary',
+      onClick: () => navigate('/transfer/bank')
     },
     {
       name: 'Invest',
       icon: Landmark,
-      color: 'text-yellow-500',
+      color: 'text-primary',
       onClick: () => navigate('/invest')
-    },
-    {
-      name: 'Deposit',
-      icon: PiggyBank,
-      color: 'text-blue-400',
-      component: <AddMoneyDialog />
     },
     {
       name: 'Withdraw',
       icon: BadgeDollarSign,
-      color: 'text-red-500',
+      color: 'text-primary',
       onClick: () => toast({
         title: "Withdrawal",
         description: "Withdrawal feature coming soon!"
       })
     },
     {
+      name: 'Deposit',
+      icon: PiggyBank,
+      color: 'text-primary',
+      component: <AddMoneyDialog />
+    },
+    {
       name: 'Card',
       icon: CreditCard,
-      color: 'text-indigo-500',
+      color: 'text-primary',
       onClick: () => navigate('/cards')
     },
     {
       name: 'History',
       icon: Receipt,
-      color: 'text-gray-500',
+      color: 'text-primary',
       onClick: () => navigate('/history')
     },
     {
       name: 'Airtime',
       icon: Phone,
-      color: 'text-pink-500',
+      color: 'text-primary',
       onClick: () => navigate('/airtime')
     },
     {
       name: 'Internet',
       icon: Wifi,
-      color: 'text-sky-500',
+      color: 'text-primary',
       onClick: () => navigate('/data')
     },
     {
       name: 'TV',
       icon: Smartphone,
-      color: 'text-amber-500',
+      color: 'text-primary',
       special: true,
       onClick: () => toast({
         title: "TV Subscriptions",
@@ -105,7 +105,7 @@ export const createQuickActions = (toast: any) => {
     {
       name: 'Utilities',
       icon: Bolt,
-      color: 'text-orange-500',
+      color: 'text-primary',
       onClick: () => toast({
         title: "Utilities",
         description: "Utilities payment feature coming soon!"

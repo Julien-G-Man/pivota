@@ -31,30 +31,13 @@ export default function Landing() {
           
           {/* Get Started Button */}
           <Button 
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/login")}
             className="text-lg py-6 px-8 mt-6 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 animate-pulse"
             size="lg"
           >
             Get Started
             <ArrowRight className="ml-2" />
           </Button>
-          
-          {/* Account Buttons */}
-          <div className="space-y-4 pt-10 mt-6">
-            <Button 
-              onClick={() => navigate("/register")} 
-              className="w-full text-lg py-6 bg-gradient-to-r from-blue-600 to-blue-500"
-            >
-              Create Account
-            </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => navigate("/login")} 
-              className="w-full text-lg py-6 border border-blue-200"
-            >
-              Sign In
-            </Button>
-          </div>
         </div>
       </div>
     </div>

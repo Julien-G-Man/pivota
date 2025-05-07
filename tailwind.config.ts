@@ -26,9 +26,9 @@ export default {
         background: 'hsl(0, 0%, 100%)',
         foreground: 'hsl(222, 47%, 11%)',
         primary: {
-          DEFAULT: 'hsl(230, 60%, 30%)', // Deeper Navy Blue
+          DEFAULT: 'hsl(217, 91%, 24%)', // Deeper Navy Blue
           foreground: 'hsl(0, 0%, 100%)',
-          light: 'hsl(230, 60%, 50%)', // Slightly lighter for better contrast
+          light: 'hsl(217, 91%, 34%)', // Slightly lighter for better contrast
         },
         secondary: {
           DEFAULT: 'hsl(230, 30%, 95%)', // Light Navy Blue

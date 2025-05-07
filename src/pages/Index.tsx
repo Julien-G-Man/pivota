@@ -90,12 +90,12 @@ const Index = () => {
         
         {/* Main balance card with blue gradient */}
         <Card className="mt-4 overflow-hidden border-none shadow-lg rounded-xl">
-          <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-4">
+          <div className="bg-gradient-to-br from-blue-700 to-blue-600 text-white p-4">
             <Balance balance={balance} currency={currency} />
             
             <div className="flex justify-end mt-4">
               <AddMoneyDialog>
-                <Button className="bg-white text-blue-600 rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
+                <Button className="bg-white text-blue-700 rounded-full px-5 py-2 font-medium shadow-md hover:bg-white/90 transition-colors">
                   + Add Money
                 </Button>
               </AddMoneyDialog>
@@ -112,7 +112,7 @@ const Index = () => {
         <QuickActions />
         
         {/* Promotion Banner */}
-        <div className="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 shadow-sm border border-blue-100 flex items-center">
+        <div className="mt-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 shadow-sm border border-blue-200 flex items-center">
           <div className="h-12 w-12 rounded-full bg-black flex-shrink-0 mr-3 overflow-hidden">
             <img 
               src="/lovable-uploads/4e1ce3d6-16e7-4833-8039-40fdcae7ce29.png" 
@@ -126,7 +126,7 @@ const Index = () => {
           </div>
           <Button 
             onClick={() => toast({ title: "Promotion", description: "Promotion details coming soon!" })}
-            className="bg-blue-600 text-white rounded-full px-3 py-1 text-xs"
+            className="bg-blue-700 text-white rounded-full px-3 py-1 text-xs"
           >
             Click for Security
           </Button>
@@ -136,7 +136,7 @@ const Index = () => {
         <div className="fixed bottom-24 right-4">
           <button
             onClick={handleSecurityClick}
-            className="h-14 w-14 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center shadow-lg"
+            className="h-14 w-14 rounded-full bg-gradient-to-r from-blue-700 to-blue-600 flex items-center justify-center shadow-lg"
           >
             <Shield size={24} className="text-white" />
           </button>
