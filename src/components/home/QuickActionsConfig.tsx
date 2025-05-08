@@ -19,7 +19,7 @@ import {
   ShoppingCart,
   Plus,
   Landmark,
-  Bot
+  MessageSquare
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 import { TransferDialog } from '../transfer/TransferDialog';
@@ -30,7 +30,7 @@ export const createQuickActions = (toast: any) => {
   
   const actions: ActionItem[] = [
     {
-      name: 'To a Friend',
+      name: 'To Pivota',
       icon: Send,
       color: 'text-primary',
       component: <TransferDialog />
@@ -107,7 +107,7 @@ export const createQuickActions = (toast: any) => {
     },
     {
       name: 'AI Advisor',
-      icon: Bot,
+      icon: MessageSquare,
       color: 'text-primary',
       onClick: () => navigate('/invest')
     }
@@ -115,3 +115,4 @@ export const createQuickActions = (toast: any) => {
 
   return actions;
 };
+

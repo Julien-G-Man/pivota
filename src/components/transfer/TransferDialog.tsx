@@ -38,9 +38,11 @@ export function TransferDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
-          <Send size={18} />
-          <span className="text-sm font-medium">Transfer</span>
+        <button className="flex flex-col items-center justify-center w-full">
+          <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10 mb-1">
+            <Send size={20} className="text-primary" />
+          </div>
+          <span className="text-xs text-center">To Pivota</span>
         </button>
       </DialogTrigger>
       <DialogContent>
