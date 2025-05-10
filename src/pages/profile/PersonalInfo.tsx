@@ -1,7 +1,7 @@
 
-import { useState } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, User, Mail, Phone, MapPin, Calendar, Home, Briefcase, Edit2 } from 'lucide-react';
+import { ChevronLeft, User, Mail, Phone, MapPin, Calendar, Home, Briefcase, Edit2, Upload, Image } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -49,6 +49,8 @@ const PersonalInfo = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState("personal");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Get user data from localStorage or use default
   const getUserData = () => {
@@ -70,11 +72,13 @@ const PersonalInfo = () => {
       company: "Tech Solutions Inc.",
       industry: "Technology",
       income: "50000-100000",
-      taxId: "TAX12345678"
+      taxId: "TAX12345678",
+      profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
     };
   };
 
-  const userData = getUserData();
+  const [userData, setUserData] = useState(getUserData());
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Form for personal details
   const profileForm = useForm<z.infer<typeof profileFormSchema>>({
@@ -108,6 +112,7 @@ const PersonalInfo = () => {
     // Merge with existing data and save to localStorage
     const updatedUser = { ...userData, ...data };
     localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+    setUserData(updatedUser);
     
     toast({
       title: "Profile Updated",
@@ -121,6 +126,7 @@ const PersonalInfo = () => {
     // Merge with existing data and save to localStorage
     const updatedUser = { ...userData, ...data };
     localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+    setUserData(updatedUser);
     
     toast({
       title: "Profile Updated",
@@ -130,11 +136,53 @@ const PersonalInfo = () => {
     setIsEditing(false);
   };
 
-  const handleUploadPhoto = () => {
+  const handleUploadButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        setSelectedImage(result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleConfirmUpload = () => {
+    if (selectedImage) {
+      // Save the selected image to user profile data
+      const updatedUser = { ...userData, profilePicture: selectedImage };
+      localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+      setUserData(updatedUser);
+      
+      toast({
+        title: "Profile Picture Updated",
+        description: "Your profile picture has been updated successfully.",
+      });
+      
+      setSelectedImage(null);
+      setDialogOpen(false);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    // Reset profile picture to default
+    const updatedUser = { ...userData, profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" };
+    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+    setUserData(updatedUser);
+    
     toast({
-      title: "Feature Coming Soon",
-      description: "Photo upload functionality will be available soon.",
+      title: "Profile Picture Removed",
+      description: "Your profile picture has been removed.",
     });
+    
+    setDialogOpen(false);
   };
 
   return (
@@ -151,13 +199,13 @@ const PersonalInfo = () => {
           <CardContent className="p-4">
             <div className="flex items-center justify-center flex-col pt-2">
               <Avatar className="h-24 w-24 border-4 border-primary/20">
-                <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" />
+                <AvatarImage src={userData.profilePicture} alt="User" />
                 <AvatarFallback>JG</AvatarFallback>
               </Avatar>
               <h2 className="mt-4 text-2xl font-bold">{userData.firstName} {userData.lastName}</h2>
               <p className="text-muted-foreground">{userData.email}</p>
 
-              <Dialog>
+              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
                 <DialogTrigger asChild>
                   <Button variant="outline" className="mt-4">
                     Update Photo
@@ -169,12 +217,34 @@ const PersonalInfo = () => {
                   </DialogHeader>
                   <div className="flex flex-col items-center">
                     <Avatar className="h-32 w-32 border-4 border-primary/20">
-                      <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" />
+                      <AvatarImage 
+                        src={selectedImage || userData.profilePicture} 
+                        alt="User" 
+                      />
                       <AvatarFallback>JG</AvatarFallback>
                     </Avatar>
+                    
+                    <input 
+                      type="file" 
+                      ref={fileInputRef}
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="hidden"
+                    />
+                    
                     <div className="flex flex-col gap-2 w-full mt-4">
-                      <Button onClick={handleUploadPhoto}>Upload New Photo</Button>
-                      <Button variant="outline">Remove Photo</Button>
+                      {selectedImage ? (
+                        <Button onClick={handleConfirmUpload} className="flex gap-2 items-center">
+                          <Upload size={16} />
+                          Confirm New Photo
+                        </Button>
+                      ) : (
+                        <Button onClick={handleUploadButtonClick} className="flex gap-2 items-center">
+                          <Image size={16} />
+                          Upload New Photo
+                        </Button>
+                      )}
+                      <Button variant="outline" onClick={handleRemovePhoto}>Remove Photo</Button>
                     </div>
                   </div>
                 </DialogContent>

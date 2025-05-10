@@ -13,6 +13,19 @@ const Profile = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  // Get user profile from localStorage
+  const getUserProfile = () => {
+    const storedProfile = localStorage.getItem("userProfile");
+    if (storedProfile) {
+      return JSON.parse(storedProfile);
+    }
+    return null;
+  };
+
+  // Use stored profile picture if available
+  const userProfile = getUserProfile();
+  const profilePicture = userProfile?.profilePicture || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix";
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -66,12 +79,14 @@ const Profile = () => {
           <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 p-6">
             <div className="flex items-center">
               <Avatar className="h-16 w-16 border-2 border-white">
-                <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" />
+                <AvatarImage src={profilePicture} alt="User" />
                 <AvatarFallback>JG</AvatarFallback>
               </Avatar>
               <div className="ml-4 text-white">
-                <h2 className="font-bold text-lg">Julien Glory Manana</h2>
-                <p className="text-white/80 text-sm">+237 612 345 678</p>
+                <h2 className="font-bold text-lg">
+                  {userProfile?.firstName || "Julien"} {userProfile?.lastName || "Glory Manana"}
+                </h2>
+                <p className="text-white/80 text-sm">{userProfile?.phone || "+237 612 345 678"}</p>
               </div>
             </div>
           </div>
