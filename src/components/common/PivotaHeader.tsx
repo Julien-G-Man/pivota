@@ -1,13 +1,20 @@
 
-import { BellRing, Search } from 'lucide-react';
+import { BellRing, ChevronLeft, Search } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface PivotaHeaderProps {
   title: string;
   showIcons?: boolean;
+  showBackButton?: boolean;
+  onBackClick?: () => void;
 }
 
-export default function PivotaHeader({ title, showIcons = true }: PivotaHeaderProps) {
+export default function PivotaHeader({ 
+  title, 
+  showIcons = true, 
+  showBackButton = false, 
+  onBackClick 
+}: PivotaHeaderProps) {
   const { toast } = useToast();
   
   const handleNotificationClick = () => {
@@ -19,7 +26,15 @@ export default function PivotaHeader({ title, showIcons = true }: PivotaHeaderPr
   
   return (
     <header className="flex justify-between items-center mb-6">
-      <div>
+      <div className="flex items-center">
+        {showBackButton && (
+          <button 
+            onClick={onBackClick}
+            className="p-2 mr-2 rounded-full hover:bg-muted transition-colors"
+          >
+            <ChevronLeft size={20} />
+          </button>
+        )}
         <h1 className="text-2xl font-bold">{title}</h1>
       </div>
       
