@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
-import { Bell, Headset, Eye, EyeOff, ArrowRight, Shield } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Bell, Headset, Eye, EyeOff, ArrowRight, Shield, QrCode } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import QuickActions from '@/components/home/QuickActions';
 import RecentTransactions from '@/components/transactions/RecentTransactions';
@@ -14,6 +13,7 @@ import Balance from '@/components/home/Balance';
 
 const Index = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [balance] = useState(15000000.00);
   const [currency] = useState('FCFA');
   const [userName] = useState('Julien Gman');
@@ -27,10 +27,7 @@ const Index = () => {
   };
 
   const handleNotificationClick = () => {
-    toast({
-      title: "Notifications",
-      description: "You have 2 new notifications",
-    });
+    navigate('/profile/notifications');
   };
 
   const handleQrCodeClick = () => {
@@ -74,9 +71,8 @@ const Index = () => {
               onClick={handleQrCodeClick}
               className="p-2 rounded-full hover:bg-muted/80 transition-colors"
             >
-              <span className="border-2 border-muted-foreground w-5 h-5 flex items-center justify-center rounded-sm">
-                <span className="sr-only">QR Code</span>
-              </span>
+              <QrCode size={20} className="text-muted-foreground" />
+              <span className="sr-only">QR Code</span>
             </button>
             <button
               onClick={handleNotificationClick}

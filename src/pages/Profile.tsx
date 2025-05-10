@@ -1,5 +1,5 @@
 
-import { Fingerprint, Shield, Bell, User, CreditCard, Lock, Settings, MessageCircle, ChevronRight } from 'lucide-react';
+import { Fingerprint, Shield, Bell, User, CreditCard, Lock, Settings, MessageCircle, ChevronRight, FaceRecognition } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import PivotaHeader from '@/components/common/PivotaHeader';
@@ -78,10 +78,18 @@ const Profile = () => {
           <CardContent className="p-4 bg-gradient-to-b from-white to-gray-50">
             <div className="flex justify-between py-3">
               <div className="flex items-center">
-                <Shield className="mr-2 text-blue-600" size={18} />
-                <span className="text-sm font-medium">Biometric Login</span>
+                <Fingerprint className="mr-2 text-blue-600" size={18} />
+                <span className="text-sm font-medium">Fingerprint Login</span>
               </div>
               <Switch defaultChecked />
+            </div>
+            
+            <div className="flex justify-between py-3">
+              <div className="flex items-center">
+                <FaceRecognition className="mr-2 text-blue-600" size={18} />
+                <span className="text-sm font-medium">Face Recognition</span>
+              </div>
+              <Switch />
             </div>
             
             <div className="flex justify-between py-3">

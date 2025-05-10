@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Settings as SettingsIcon, Globe, Moon, Sun, MessageSquare, Eye, Database, CreditCard, Languages } from 'lucide-react';
+import { Settings as SettingsIcon, Globe, Moon, Sun, MessageSquare, Eye, Database, CreditCard, Languages, QrCode, Fingerprint, FaceRecognition } from 'lucide-react';
 
 import PivotaHeader from '@/components/common/PivotaHeader';
 import BottomNavigation from '@/components/layout/BottomNavigation';
@@ -45,6 +44,30 @@ const Settings = () => {
   const [defaultPaymentMethod, setDefaultPaymentMethod] = useState('wallet');
   const [oneClickPayment, setOneClickPayment] = useState(false);
   const [askForPin, setAskForPin] = useState(true);
+  const [qrCodePayment, setQrCodePayment] = useState(true);
+  
+  // Authentication settings
+  const [fingerprintAuth, setFingerprintAuth] = useState(true);
+  const [faceRecognitionAuth, setFaceRecognitionAuth] = useState(false);
+  
+  // Currency options
+  const currencyOptions = [
+    { value: 'fcfa', label: 'FCFA (CFA Franc)' },
+    { value: 'usd', label: 'USD (US Dollar)' },
+    { value: 'eur', label: 'EUR (Euro)' },
+    { value: 'ngn', label: 'NGN (Nigerian Naira)' },
+    { value: 'ghs', label: 'GHS (Ghanaian Cedi)' },
+    { value: 'zar', label: 'ZAR (South African Rand)' },
+    { value: 'kes', label: 'KES (Kenyan Shilling)' },
+    { value: 'gbp', label: 'GBP (British Pound)' },
+    { value: 'cad', label: 'CAD (Canadian Dollar)' },
+    { value: 'aud', label: 'AUD (Australian Dollar)' },
+    { value: 'jpy', label: 'JPY (Japanese Yen)' },
+    { value: 'cny', label: 'CNY (Chinese Yuan)' },
+    { value: 'inr', label: 'INR (Indian Rupee)' },
+    { value: 'mad', label: 'MAD (Moroccan Dirham)' },
+    { value: 'egy', label: 'EGP (Egyptian Pound)' },
+  ];
   
   const handleLanguageChange = (value: string) => {
     setLanguage(value);
@@ -150,6 +173,30 @@ const Settings = () => {
     });
   };
   
+  const toggleQrCodePayment = (checked: boolean) => {
+    setQrCodePayment(checked);
+    toast({
+      title: "Payment Setting Updated",
+      description: `QR code payment ${checked ? 'enabled' : 'disabled'}.`,
+    });
+  };
+  
+  const toggleFingerprintAuth = (checked: boolean) => {
+    setFingerprintAuth(checked);
+    toast({
+      title: "Authentication Setting Updated",
+      description: `Fingerprint authentication ${checked ? 'enabled' : 'disabled'}.`,
+    });
+  };
+  
+  const toggleFaceRecognitionAuth = (checked: boolean) => {
+    setFaceRecognitionAuth(checked);
+    toast({
+      title: "Authentication Setting Updated",
+      description: `Face recognition authentication ${checked ? 'enabled' : 'disabled'}.`,
+    });
+  };
+  
   const handleDeleteAccount = () => {
     toast({
       title: "Account Deletion",
@@ -226,10 +273,12 @@ const Settings = () => {
                       <SelectTrigger id="currency">
                         <SelectValue placeholder="Select Currency" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="fcfa">FCFA (CFA Franc)</SelectItem>
-                        <SelectItem value="usd">USD (US Dollar)</SelectItem>
-                        <SelectItem value="eur">EUR (Euro)</SelectItem>
+                      <SelectContent className="max-h-[300px] overflow-y-auto">
+                        {currencyOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
@@ -272,6 +321,48 @@ const Settings = () => {
                         <SelectItem value="30m">After 30 minutes</SelectItem>
                       </SelectContent>
                     </Select>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4">
+                <h3 className="text-lg font-semibold mb-4">Security</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center py-2">
+                    <div className="flex items-center">
+                      <div className="p-2 rounded-full bg-blue-100 mr-3">
+                        <Fingerprint size={18} className="text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Fingerprint Authentication</p>
+                        <p className="text-xs text-muted-foreground">Enable login with fingerprint</p>
+                      </div>
+                    </div>
+                    <Switch 
+                      checked={fingerprintAuth}
+                      onCheckedChange={toggleFingerprintAuth}
+                    />
+                  </div>
+                  
+                  <Separator />
+                  
+                  <div className="flex justify-between items-center py-2">
+                    <div className="flex items-center">
+                      <div className="p-2 rounded-full bg-blue-100 mr-3">
+                        <FaceRecognition size={18} className="text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Face Recognition</p>
+                        <p className="text-xs text-muted-foreground">Enable login with face recognition</p>
+                      </div>
+                    </div>
+                    <Switch 
+                      checked={faceRecognitionAuth}
+                      onCheckedChange={toggleFaceRecognitionAuth}
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -524,6 +615,7 @@ const Settings = () => {
                         <SelectItem value="bank">Bank Account</SelectItem>
                         <SelectItem value="card">Debit/Credit Card</SelectItem>
                         <SelectItem value="momo">Mobile Money</SelectItem>
+                        <SelectItem value="qrcode">QR Code</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -541,6 +633,22 @@ const Settings = () => {
                     <Switch 
                       checked={oneClickPayment}
                       onCheckedChange={toggleOneClickPayment}
+                    />
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-2">
+                    <div className="flex items-center">
+                      <div className="p-2 rounded-full bg-blue-100 mr-3">
+                        <QrCode size={18} className="text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="font-medium">QR Code Payment</p>
+                        <p className="text-xs text-muted-foreground">Enable payment by scanning QR code</p>
+                      </div>
+                    </div>
+                    <Switch 
+                      checked={qrCodePayment}
+                      onCheckedChange={toggleQrCodePayment}
                     />
                   </div>
                   

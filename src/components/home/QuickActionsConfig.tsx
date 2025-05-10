@@ -19,7 +19,8 @@ import {
   ShoppingCart,
   Plus,
   Landmark,
-  MessageSquare
+  MessageSquare,
+  QrCode
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 import { TransferDialog } from '../transfer/TransferDialog';
@@ -87,13 +88,12 @@ export const createQuickActions = (toast: any) => {
       onClick: () => navigate('/data')
     },
     {
-      name: 'TV',
-      icon: Smartphone,
+      name: 'QR Pay',
+      icon: QrCode,
       color: 'text-primary',
-      special: true,
       onClick: () => toast({
-        title: "TV Subscriptions",
-        description: "TV subscription feature coming soon!"
+        title: "QR Code Payment",
+        description: "Scan a QR code to make a payment"
       })
     },
     {
@@ -115,4 +115,3 @@ export const createQuickActions = (toast: any) => {
 
   return actions;
 };
-
