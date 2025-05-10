@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, Shield, Lock, Fingerprint, Eye, EyeOff, CreditCard, AlertTriangle } from 'lucide-react';
+import { ChevronLeft, Shield, Lock, Fingerprint, Eye, EyeOff, CreditCard, AlertTriangle, Scan } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

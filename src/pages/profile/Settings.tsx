@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Settings as SettingsIcon, Globe, Moon, Sun, MessageSquare, Eye, Database, CreditCard, Languages, QrCode, Fingerprint, FaceRecognition } from 'lucide-react';
+import { Settings as SettingsIcon, Globe, Moon, Sun, MessageSquare, Eye, Database, CreditCard, Languages, QrCode, Fingerprint, Scan } from 'lucide-react';
 
 import PivotaHeader from '@/components/common/PivotaHeader';
 import BottomNavigation from '@/components/layout/BottomNavigation';
@@ -352,7 +352,7 @@ const Settings = () => {
                   <div className="flex justify-between items-center py-2">
                     <div className="flex items-center">
                       <div className="p-2 rounded-full bg-blue-100 mr-3">
-                        <FaceRecognition size={18} className="text-blue-600" />
+                        <Scan size={18} className="text-blue-600" />
                       </div>
                       <div>
                         <p className="font-medium">Face Recognition</p>
