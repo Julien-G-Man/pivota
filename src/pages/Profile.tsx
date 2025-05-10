@@ -1,6 +1,6 @@
-
 import { Fingerprint, Shield, Bell, User, CreditCard, Lock, Settings, MessageCircle, ChevronRight, Scan } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import PivotaHeader from '@/components/common/PivotaHeader';
 import { Button } from '@/components/ui/button';
@@ -12,18 +12,41 @@ import { useToast } from '@/hooks/use-toast';
 const Profile = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [userProfile, setUserProfile] = useState<any>(null);
 
   // Get user profile from localStorage
-  const getUserProfile = () => {
-    const storedProfile = localStorage.getItem("userProfile");
-    if (storedProfile) {
-      return JSON.parse(storedProfile);
-    }
-    return null;
-  };
+  useEffect(() => {
+    const getUserProfile = () => {
+      const storedProfile = localStorage.getItem("userProfile");
+      if (storedProfile) {
+        setUserProfile(JSON.parse(storedProfile));
+      } else {
+        setUserProfile({
+          firstName: "Julien",
+          lastName: "Glory Manana",
+          phone: "+237 612 345 678",
+          profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+        });
+      }
+    };
+    
+    getUserProfile();
+    
+    // Listen for profile updates
+    const handleProfileUpdate = () => {
+      getUserProfile();
+    };
+    
+    window.addEventListener('profileUpdated', handleProfileUpdate);
+    window.addEventListener('storage', handleProfileUpdate);
+    
+    return () => {
+      window.removeEventListener('profileUpdated', handleProfileUpdate);
+      window.removeEventListener('storage', handleProfileUpdate);
+    };
+  }, []);
 
   // Use stored profile picture if available
-  const userProfile = getUserProfile();
   const profilePicture = userProfile?.profilePicture || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix";
 
   const handleLogout = () => {
@@ -80,7 +103,9 @@ const Profile = () => {
             <div className="flex items-center">
               <Avatar className="h-16 w-16 border-2 border-white">
                 <AvatarImage src={profilePicture} alt="User" />
-                <AvatarFallback>JG</AvatarFallback>
+                <AvatarFallback>
+                  {userProfile ? (userProfile.firstName?.charAt(0) + userProfile.lastName?.charAt(0)) : "JG"}
+                </AvatarFallback>
               </Avatar>
               <div className="ml-4 text-white">
                 <h2 className="font-bold text-lg">

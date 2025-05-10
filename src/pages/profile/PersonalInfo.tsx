@@ -1,5 +1,4 @@
-
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, User, Mail, Phone, MapPin, Calendar, Home, Briefcase, Edit2, Upload, Image } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -80,6 +79,14 @@ const PersonalInfo = () => {
   const [userData, setUserData] = useState(getUserData());
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  // Notify other components about profile updates
+  const notifyProfileUpdate = () => {
+    // Dispatch custom event
+    window.dispatchEvent(new Event('profileUpdated'));
+    // Also update localStorage
+    localStorage.setItem("userProfile", JSON.stringify(userData));
+  };
+
   // Form for personal details
   const profileForm = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
@@ -111,8 +118,11 @@ const PersonalInfo = () => {
   const onSubmitPersonal = (data: z.infer<typeof profileFormSchema>) => {
     // Merge with existing data and save to localStorage
     const updatedUser = { ...userData, ...data };
-    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
     setUserData(updatedUser);
+    
+    // Notify profile update
+    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+    notifyProfileUpdate();
     
     toast({
       title: "Profile Updated",
@@ -125,8 +135,11 @@ const PersonalInfo = () => {
   const onSubmitProfessional = (data: z.infer<typeof professionalFormSchema>) => {
     // Merge with existing data and save to localStorage
     const updatedUser = { ...userData, ...data };
-    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
     setUserData(updatedUser);
+    
+    // Notify profile update
+    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+    notifyProfileUpdate();
     
     toast({
       title: "Profile Updated",
@@ -158,8 +171,11 @@ const PersonalInfo = () => {
     if (selectedImage) {
       // Save the selected image to user profile data
       const updatedUser = { ...userData, profilePicture: selectedImage };
-      localStorage.setItem("userProfile", JSON.stringify(updatedUser));
       setUserData(updatedUser);
+      
+      // Notify profile update
+      localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+      notifyProfileUpdate();
       
       toast({
         title: "Profile Picture Updated",
@@ -174,8 +190,11 @@ const PersonalInfo = () => {
   const handleRemovePhoto = () => {
     // Reset profile picture to default
     const updatedUser = { ...userData, profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" };
-    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
     setUserData(updatedUser);
+    
+    // Notify profile update
+    localStorage.setItem("userProfile", JSON.stringify(updatedUser));
+    notifyProfileUpdate();
     
     toast({
       title: "Profile Picture Removed",

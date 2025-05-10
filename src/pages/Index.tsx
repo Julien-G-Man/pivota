@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Bell, Headset, Eye, EyeOff, ArrowRight, Shield, QrCode } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import BottomNavigation from '@/components/layout/BottomNavigation';
@@ -16,9 +16,47 @@ const Index = () => {
   const navigate = useNavigate();
   const [balance] = useState(15000000.00);
   const [currency] = useState('FCFA');
-  const [userName] = useState('Julien Gman');
+  const [userName, setUserName] = useState('Julien Gman');
+  const [profilePicture, setProfilePicture] = useState('https://api.dicebear.com/7.x/avataaars/svg?seed=John');
   const [showBalance, setShowBalance] = useState(true);
   
+  // Get user profile from localStorage on component mount and when it changes
+  useEffect(() => {
+    const getUserProfile = () => {
+      const storedProfile = localStorage.getItem("userProfile");
+      if (storedProfile) {
+        const profile = JSON.parse(storedProfile);
+        if (profile.firstName && profile.lastName) {
+          setUserName(`${profile.firstName} ${profile.lastName}`);
+        }
+        if (profile.profilePicture) {
+          setProfilePicture(profile.profilePicture);
+        }
+      }
+    };
+    
+    getUserProfile();
+    
+    // Add event listener for storage changes
+    const handleStorageChange = () => {
+      getUserProfile();
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Custom event listener for profile updates
+    const handleProfileUpdate = () => {
+      getUserProfile();
+    };
+    
+    window.addEventListener('profileUpdated', handleProfileUpdate);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('profileUpdated', handleProfileUpdate);
+    };
+  }, []);
+
   const handleSupportClick = () => {
     toast({
       title: "Help",
@@ -51,11 +89,11 @@ const Index = () => {
         <div className="flex items-center justify-between mb-6">
           <Link to="/profile" className="flex items-center gap-3">
             <Avatar className="h-10 w-10 border border-primary/20">
-              <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" />
-              <AvatarFallback>JG</AvatarFallback>
+              <AvatarImage src={profilePicture} />
+              <AvatarFallback>{userName?.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
             <div>
-              <h2 className="font-semibold text-foreground">Hi, {userName}</h2>
+              <h2 className="font-semibold text-foreground">Hi, {userName?.split(' ')[0]}</h2>
             </div>
           </Link>
           
