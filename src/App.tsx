@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,6 +28,12 @@ import Finance from "./pages/Finance";
 import Rewards from "./pages/Rewards";
 import Cards from "./pages/Cards";
 import InvestmentAdvisor from "./pages/InvestmentAdvisor";
+
+// Profile section pages
+import PersonalInfo from "./pages/profile/PersonalInfo";
+import Security from "./pages/profile/Security";
+import Notifications from "./pages/profile/Notifications";
+import Settings from "./pages/profile/Settings";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +67,12 @@ const App = () => (
               <Route path="/wallet" element={<PrivateRoute><Wallet /></PrivateRoute>} />
               <Route path="/history" element={<PrivateRoute><History /></PrivateRoute>} />
               <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+              
+              {/* Profile Sections */}
+              <Route path="/profile/personal-info" element={<PrivateRoute><PersonalInfo /></PrivateRoute>} />
+              <Route path="/profile/security" element={<PrivateRoute><Security /></PrivateRoute>} />
+              <Route path="/profile/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
+              <Route path="/profile/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
               
               {/* Transfer Routes */}
               <Route path="/transfer/bank" element={<PrivateRoute><BankTransfer /></PrivateRoute>} />
