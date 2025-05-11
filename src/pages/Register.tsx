@@ -14,7 +14,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmpassword, setConfirmPassword] = useState(" ");
+  const [confirmpassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -150,7 +150,7 @@ export default function Register() {
           <div className="space-y-2">
             <Label htmlFor="confirmpassword">Confirm Password *</Label>
             <Input
-              id="password"
+              id="confirmpassword"
               type="password"
               placeholder="Confirm your password"
               value={confirmpassword}
