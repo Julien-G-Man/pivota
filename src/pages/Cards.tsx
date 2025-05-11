@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Plus, ChevronRight, CreditCard, ShieldCheck, ShoppingCart, Globe, Lock } from 'lucide-react';
 import BottomNavigation from '@/components/layout/BottomNavigation';
@@ -28,7 +29,7 @@ const Cards = () => {
     {
       id: '1',
       type: 'Visa',
-      number: '1234 5678 9012 3456',
+      number: '4242 4242 4242 4242',
       expiryMonth: '12',
       expiryYear: '26',
       color: 'from-blue-700 to-blue-950',

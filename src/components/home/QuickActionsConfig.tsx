@@ -50,10 +50,10 @@ export const createQuickActions = (toast: any) => {
       onClick: () => navigate('/transfer/bank')
     },
     {
-      name: 'Invest',
-      icon: Landmark,
+      name: 'To MOMO',
+      icon: Smartphone,
       color: 'text-primary',
-      onClick: () => navigate('/invest')
+      onClick: () => navigate('/transfer/momo')
     },
     {
       name: 'Withdraw',
@@ -110,7 +110,7 @@ export const createQuickActions = (toast: any) => {
       name: 'AI Advisor',
       icon: MessageSquare,
       color: 'text-primary',
-      onClick: () => navigate('/invest')
+      onClick: () => navigate('/support')
     }
   ];
 

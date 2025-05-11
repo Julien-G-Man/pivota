@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Award, BarChart, CreditCard, User } from 'lucide-react';
+import { Home, Wallet, CreditCard, MessageSquare, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavigationItem {
@@ -12,9 +12,9 @@ interface NavigationItem {
 
 const navigationItems: NavigationItem[] = [
   { name: 'Home', path: '/home', icon: Home },
-  { name: 'Rewards', path: '/rewards', icon: Award },
-  { name: 'Finance', path: '/finance', icon: BarChart },
+  { name: 'Wallet', path: '/wallet', icon: Wallet },
   { name: 'Cards', path: '/cards', icon: CreditCard },
+  { name: 'Support', path: '/support', icon: MessageSquare },
   { name: 'Me', path: '/profile', icon: User },
 ];
 
