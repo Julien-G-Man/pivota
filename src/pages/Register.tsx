@@ -20,7 +20,7 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!firstName || !lastName || !email || !phone || !password) {
+    if (!firstName || !lastName || !email || !phone || !password || !confirmpassword) {
       toast({
         title: "Error",
         description: "Please fill in all required fields",
@@ -148,10 +148,10 @@ export default function Register() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmpassword"> Confirm Password *</Label>
+            <Label htmlFor="confirmpassword">Confirm Password *</Label>
             <Input
-              id="confirmpassword"
-              type="confirmpassword"
+              id="password"
+              type="password"
               placeholder="Confirm your password"
               value={confirmpassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
