@@ -20,7 +20,8 @@ import {
   Plus,
   Landmark,
   MessageSquare,
-  QrCode
+  QrCode,
+  User
 } from 'lucide-react';
 import { ActionItem } from './types/QuickActionTypes';
 import { TransferDialog } from '../transfer/TransferDialog';
@@ -31,8 +32,8 @@ export const createQuickActions = (toast: any) => {
   
   const actions: ActionItem[] = [
     {
-      name: 'To Pivota',
-      icon: Send,
+      name: 'To Friend',
+      icon: User,
       color: 'text-primary',
       component: <TransferDialog />
     },
