@@ -219,11 +219,15 @@ const Support = () => {
     // Check for financial advice questions
     if (input.includes('finances') || 
         input.includes('spending') || 
+        input.includes('expenditure') ||
         input.includes('budget') || 
         input.includes('money') || 
+        input.includes('finance') ||
         input.includes('financial') || 
         input.includes('habitudes') ||
         input.includes('depenses') ||
+        input.includes('invest') ||
+        input.includes('investent') ||
         input.includes('mbongo')) {
       return generateFinancialInsightResponse(language);
     }
@@ -245,8 +249,8 @@ const Support = () => {
     }
     
     if (language === 'en') {
-      if (input.includes('hello') || input.includes('hi')) {
-        return 'Hello! How can I assist you with Pivota today?';
+      if (input.includes('hello') || input.includes('hi')) || input.includes('good')  {
+        return 'Hello! I\'m Pivie, your personal finance AI assistant. How can I assist you with Pivota today?';
       } else if (input.includes('reset') && input.includes('pin')) {
         return 'To reset your PIN, go to Profile > Security > Reset PIN. You will receive an OTP on your registered mobile number.';
       } else if ((input.includes('transfer') || input.includes('send money')) && input.includes('friend')) {
@@ -266,7 +270,7 @@ const Support = () => {
       }
     } else if (language === 'fr') {
       if (input.includes('bonjour') || input.includes('salut')) {
-        return 'Bonjour! Comment puis-je vous aider avec Pivota aujourd\'hui?';
+        return 'Bonjour! Je m\'appelle Pivie, votre assistant IA en finances personnelles. Comment puis-je vous aider avec Pivota aujourd\'hui?';
       } else if (input.includes('réinitialiser') && input.includes('pin')) {
         return 'Pour réinitialiser votre code PIN, allez dans Profil > Sécurité > Réinitialiser PIN. Vous recevrez un OTP sur votre numéro de téléphone enregistré.';
       } else if ((input.includes('transférer') || input.includes('envoyer')) && (input.includes('argent') || input.includes('ami'))) {
