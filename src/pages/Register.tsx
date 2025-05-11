@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { Mail } from "lucide-react";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!firstName || !lastName || !phone || !password) {
+    if (!firstName || !lastName || !email || !phone || !password) {
       toast({
         title: "Error",
         description: "Please fill in all required fields",
@@ -25,6 +27,36 @@ export default function Register() {
       });
       return;
     }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Store user data in localStorage for now
+    const userData = {
+      firstName,
+      middleName,
+      lastName,
+      email,
+      phone,
+    };
+    
+    localStorage.setItem("userProfile", JSON.stringify(userData));
+    localStorage.setItem("user", "registered");
+    
+    // Simulate confirmation email sent notification
+    toast({
+      title: "Success",
+      description: `Confirmation email sent to ${email}!`,
+    });
+    
     // This will be replaced with Supabase auth later
     navigate("/login");
   };
@@ -73,6 +105,21 @@ export default function Register() {
               onChange={(e) => setLastName(e.target.value)}
               className="bg-background/50"
             />
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="email">Email Address *</Label>
+            <div className="relative">
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-background/50 pl-10"
+              />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
+            </div>
           </div>
 
           <div className="space-y-2">
