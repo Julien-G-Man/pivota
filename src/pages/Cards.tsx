@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Plus, ChevronRight, CreditCard, ShieldCheck, ShoppingCart, Globe, Lock } from 'lucide-react';
 import BottomNavigation from '@/components/layout/BottomNavigation';
@@ -29,12 +28,12 @@ const Cards = () => {
     {
       id: '1',
       type: 'Visa',
-      number: '5489 7452 8645 1278',
+      number: '1234 5678 9012 3456',
       expiryMonth: '12',
       expiryYear: '26',
       color: 'from-blue-700 to-blue-950',
       frozen: false,
-      holderName: 'JULIEN GLORY MANANA',
+      holderName: 'GLORY JULIEN MANANA',
       cvv: '123'
     },
     {
@@ -45,7 +44,7 @@ const Cards = () => {
       expiryYear: '27',
       color: 'from-purple-700 to-indigo-950',
       frozen: false,
-      holderName: 'JULIEN GLORY MANANA',
+      holderName: 'GLORY JULIEN MANANA',
       cvv: '456'
     },
   ]);
@@ -88,51 +87,22 @@ const Cards = () => {
             <div className="flex flex-col gap-6">
               {cards.map((card) => (
                 <div key={card.id} className="relative">
-                  <div className={`bg-gradient-to-br ${card.color} text-white rounded-xl p-5 h-52 relative overflow-hidden shadow-lg border border-white/10 flex flex-col justify-between`}>
+                  <div className="relative rounded-xl overflow-hidden shadow-lg h-52">
                     {card.frozen && (
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
                         <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg text-center">
                           <Lock size={24} className="mx-auto mb-2" />
-                          <p className="font-bold">Card Frozen</p>
+                          <p className="font-bold text-white">Card Frozen</p>
                         </div>
                       </div>
                     )}
                     
-                    {/* Card background decorative elements */}
-                    <div className="absolute inset-0 overflow-hidden">
-                      <div className="absolute w-[300px] h-[300px] rounded-full bg-white/5 -right-20 -top-32" />
-                      <div className="absolute w-[200px] h-[200px] rounded-full bg-white/5 right-20 top-20" />
-                      <div className="absolute w-[250px] h-[250px] rounded-full bg-white/5 -left-40 -bottom-20" />
-                    </div>
-                    
-                    <div className="flex justify-between items-start z-10">
-                      <div className="space-y-4">
-                        <h3 className="text-xl font-bold">PIVOTA</h3>
-                      </div>
-                      <div className="h-12 w-12 rounded-full flex items-center justify-center">
-                        <img 
-                          src="/lovable-uploads/cac4f9d6-8128-47ae-98fe-075b3cd23075.png"
-                          alt="Pivota Logo" 
-                          className="h-10 w-10 object-contain"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="z-10 my-4">
-                      <div className="w-9 h-7 bg-gradient-to-br from-amber-300 to-yellow-600 rounded-md mb-2 overflow-hidden" />
-                      <p className="font-mono text-xl tracking-wider">{card.number}</p>
-                    </div>
-                    
-                    <div className="flex justify-between items-end z-10">
-                      <div>
-                        <p className="text-xs text-white/70">CARD HOLDER</p>
-                        <p className="font-mono tracking-wider">{card.holderName}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-white/70">EXPIRES</p>
-                        <p className="font-mono tracking-wider">{card.expiryMonth}/{card.expiryYear}</p>
-                      </div>
-                    </div>
+                    {/* Use the uploaded card image */}
+                    <img 
+                      src="/lovable-uploads/ab8d5fef-5952-443a-becb-12a55e92d46a.png" 
+                      alt="Pivota Card" 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   <Card className="mt-3">

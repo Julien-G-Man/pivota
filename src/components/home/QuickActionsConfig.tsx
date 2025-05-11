@@ -38,10 +38,10 @@ export const createQuickActions = (toast: any) => {
       component: <TransferDialog />
     },
     {
-      name: 'To MOMO',
-      icon: Phone,
+      name: 'Cards',
+      icon: CreditCard,
       color: 'text-primary',
-      onClick: () => navigate('/transfer/momo')
+      onClick: () => navigate('/cards')
     },
     {
       name: 'To Bank',
