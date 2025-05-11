@@ -39,6 +39,16 @@ export default function Register() {
       });
       return;
     }
+    
+    // Validate matching passwords
+    if (password !== confirmpassword) {
+      toast({
+        title: "Error",
+        description: "Passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
 
     // Store user data in localStorage for now
     const userData = {
