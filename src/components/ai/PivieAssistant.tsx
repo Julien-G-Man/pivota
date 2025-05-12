@@ -74,8 +74,12 @@ export function PivieAssistant({
     } else {
       if (userInput.includes('hello') || userInput.includes('hi')) {
         response = "Hello! How can I assist you with Pivota today?";
+      } else if (userInput.includes('feature') || userInput.includes('can you')) {
+        response = "I can help you with transactions, account information, financial advice, and navigating through Pivota. What would you like assistance with?";
+      } else if (userInput.includes('help') || userInput.includes('how to')) {
+        response = "I'm here to help! You can ask me about sending money, checking balances, managing cards, or any other Pivota feature.";
       } else {
-        response = "I'm Pivie, your personal assistant. I can help you with transactions, account information, and financial advice. How can I assist you today?";
+        response = "I'm Pivie, your personal assistant for Pivota. I can provide insights about your financial habits, help manage your money better, or answer questions about Pivota features. How can I assist you?";
       }
     }
 

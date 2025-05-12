@@ -1,6 +1,13 @@
 
+import { useState } from 'react';
 import { ArrowUp, ArrowDown, Calendar, CreditCard } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import TransactionReceipt from './TransactionReceipt';
 
 export type TransactionType = 'send' | 'receive' | 'bill' | 'airtime';
 
@@ -37,6 +44,7 @@ const statusColors = {
 };
 
 export default function TransactionItem({
+  id,
   type,
   title,
   subtitle,
@@ -46,6 +54,8 @@ export default function TransactionItem({
   status = 'completed',
   compact = false,
 }: TransactionItemProps) {
+  const [receiptOpen, setReceiptOpen] = useState(false);
+  
   const Icon = iconMap[type];
   const colorClasses = typeColors[type];
   
@@ -67,30 +77,50 @@ export default function TransactionItem({
   }).format(date);
   
   return (
-    <div className="flex items-center p-4 bg-background hover:bg-muted/10 transition-colors">
-      <div className={cn('p-3 mr-3 rounded-full flex items-center justify-center', colorClasses)}>
-        <Icon size={compact ? 16 : 18} />
-      </div>
-      
-      <div className="flex-1 min-w-0">
-        <div className="font-medium text-sm truncate">{title}</div>
-        <div className="text-xs text-muted-foreground">
-          {formattedDate}
-        </div>
-      </div>
-      
-      <div className="text-right">
-        <div className={cn("font-medium text-sm", {
-          'text-black': type === 'send',
-        })}>
-          {type === 'send' ? '-' : ''}{displayAmount}
-        </div>
-        <div className={cn('text-xs px-2 py-1 rounded-lg bg-green-100', 
-          statusColors[status]
-        )}>
-          Successful
-        </div>
-      </div>
-    </div>
+    <>
+      <Dialog open={receiptOpen} onOpenChange={setReceiptOpen}>
+        <DialogTrigger asChild>
+          <div className="flex items-center p-4 bg-background hover:bg-muted/10 transition-colors cursor-pointer">
+            <div className={cn('p-3 mr-3 rounded-full flex items-center justify-center', colorClasses)}>
+              <Icon size={compact ? 16 : 18} />
+            </div>
+            
+            <div className="flex-1 min-w-0">
+              <div className="font-medium text-sm truncate">{title}</div>
+              <div className="text-xs text-muted-foreground">
+                {formattedDate}
+              </div>
+            </div>
+            
+            <div className="text-right">
+              <div className={cn("font-medium text-sm", {
+                'text-black': type === 'send',
+              })}>
+                {type === 'send' ? '-' : ''}{displayAmount}
+              </div>
+              <div className={cn('text-xs px-2 py-1 rounded-lg bg-green-100', 
+                statusColors[status]
+              )}>
+                Successful
+              </div>
+            </div>
+          </div>
+        </DialogTrigger>
+        
+        <DialogContent className="sm:max-w-md p-0 gap-0">
+          <TransactionReceipt
+            id={id}
+            type={type}
+            title={title}
+            subtitle={subtitle}
+            amount={amount}
+            currency={currency}
+            date={date}
+            status={status}
+            onClose={() => setReceiptOpen(false)}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

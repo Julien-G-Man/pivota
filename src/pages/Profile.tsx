@@ -1,3 +1,4 @@
+
 import { Fingerprint, Shield, Bell, User, CreditCard, Lock, Settings, MessageCircle, ChevronRight, Scan } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -21,12 +22,20 @@ const Profile = () => {
       if (storedProfile) {
         setUserProfile(JSON.parse(storedProfile));
       } else {
-        setUserProfile({
+        // Create default profile if none exists
+        const defaultProfile = {
           firstName: "Julien",
           lastName: "Glory Manana",
           phone: "+237 612 345 678",
           profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-        });
+        };
+        
+        // Save to localStorage and set state
+        localStorage.setItem("userProfile", JSON.stringify(defaultProfile));
+        setUserProfile(defaultProfile);
+        
+        // Dispatch event to notify other components
+        window.dispatchEvent(new Event('profileUpdated'));
       }
     };
     
@@ -46,12 +55,47 @@ const Profile = () => {
     };
   }, []);
 
+  // Update profile picture
+  const updateProfilePicture = (imageUrl: string) => {
+    if (!userProfile) return;
+    
+    const updatedProfile = {
+      ...userProfile,
+      profilePicture: imageUrl
+    };
+    
+    // Save to localStorage
+    localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
+    
+    // Update state
+    setUserProfile(updatedProfile);
+    
+    // Dispatch event to notify other components
+    window.dispatchEvent(new Event('profileUpdated'));
+    window.dispatchEvent(new StorageEvent('storage', { key: 'userProfile' }));
+    
+    toast({
+      title: "Profile Updated",
+      description: "Your profile picture has been updated."
+    });
+  };
+
   // Use stored profile picture if available
   const profilePicture = userProfile?.profilePicture || "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix";
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
+  };
+  
+  // Handle file upload for profile picture
+  const handleProfileImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    // In a real app, you'd upload this to a server
+    // For this demo, we'll use a placeholder and fake a successful upload
+    updateProfilePicture(`https://api.dicebear.com/7.x/avataaars/svg?seed=${Date.now()}`);
   };
 
   const profileMenuItems = [
@@ -101,12 +145,24 @@ const Profile = () => {
         <Card className="mb-6 overflow-hidden border-none shadow-lg">
           <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 p-6">
             <div className="flex items-center">
-              <Avatar className="h-16 w-16 border-2 border-white">
-                <AvatarImage src={profilePicture} alt="User" />
-                <AvatarFallback>
-                  {userProfile ? (userProfile.firstName?.charAt(0) + userProfile.lastName?.charAt(0)) : "JG"}
-                </AvatarFallback>
-              </Avatar>
+              <label htmlFor="profile-upload" className="relative cursor-pointer">
+                <Avatar className="h-16 w-16 border-2 border-white">
+                  <AvatarImage src={profilePicture} alt="User" />
+                  <AvatarFallback>
+                    {userProfile ? (userProfile.firstName?.charAt(0) + userProfile.lastName?.charAt(0)) : "JG"}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                  <span className="text-white text-xs">Change</span>
+                </div>
+                <input 
+                  id="profile-upload" 
+                  type="file" 
+                  accept="image/*" 
+                  className="hidden"
+                  onChange={handleProfileImageUpload}
+                />
+              </label>
               <div className="ml-4 text-white">
                 <h2 className="font-bold text-lg">
                   {userProfile?.firstName || "Julien"} {userProfile?.lastName || "Glory Manana"}

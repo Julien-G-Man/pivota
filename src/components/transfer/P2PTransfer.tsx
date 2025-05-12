@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Send, QrCode, ChevronRight, UserRound } from "lucide-react";
+import { Send, QrCode, ChevronRight, UserRound, Plus } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -19,7 +19,7 @@ interface P2PTransferProps {
   children?: React.ReactNode;
 }
 
-type TransferMethod = "username" | "phone" | "qrcode";
+type TransferMethod = "username" | "phone" | "qrcode" | "new";
 
 const mockedContacts = [
   { id: '1', name: 'Jean Pierre', username: '@jeanp', phone: '+242 06 123 4567', avatarSeed: 'Jean' },
@@ -31,6 +31,9 @@ export function P2PTransfer({ children }: P2PTransferProps) {
   const [step, setStep] = useState(1);
   const [method, setMethod] = useState<TransferMethod>("username");
   const [recipient, setRecipient] = useState("");
+  const [newRecipientName, setNewRecipientName] = useState("");
+  const [newRecipientPhone, setNewRecipientPhone] = useState("");
+  const [newRecipientUsername, setNewRecipientUsername] = useState("");
   const [amount, setAmount] = useState("");
   const [note, setNote] = useState("");
   const [password, setPassword] = useState("");
@@ -54,10 +57,39 @@ export function P2PTransfer({ children }: P2PTransferProps) {
     } else {
       toast({
         title: "User not found",
-        description: "Please check the username or phone number",
+        description: "Please check the username or phone number, or add a new recipient",
         variant: "destructive"
       });
     }
+  };
+
+  const handleAddNewRecipient = () => {
+    if (!newRecipientName || !newRecipientPhone) {
+      toast({
+        title: "Missing information",
+        description: "Please provide name and phone number",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Create a new contact object for the recipient
+    const newContact = {
+      id: Date.now().toString(),
+      name: newRecipientName,
+      username: newRecipientUsername || `@${newRecipientName.toLowerCase().replace(/\s+/g, '')}`,
+      phone: newRecipientPhone,
+      avatarSeed: newRecipientName
+    };
+    
+    setSelectedContact(newContact);
+    setStep(3);
+    
+    // In a real app, this would save the new contact to the database
+    toast({
+      title: "Recipient added",
+      description: `${newRecipientName} has been added to your contacts`
+    });
   };
 
   const handleSubmit = () => {
@@ -67,6 +99,9 @@ export function P2PTransfer({ children }: P2PTransferProps) {
     });
     setStep(1);
     setRecipient("");
+    setNewRecipientName("");
+    setNewRecipientPhone("");
+    setNewRecipientUsername("");
     setAmount("");
     setNote("");
     setPassword("");
@@ -99,10 +134,11 @@ export function P2PTransfer({ children }: P2PTransferProps) {
         {step === 1 && (
           <div className="space-y-4">
             <Tabs defaultValue="username" value={method} onValueChange={(v) => setMethod(v as TransferMethod)}>
-              <TabsList className="grid grid-cols-3">
+              <TabsList className="grid grid-cols-4">
                 <TabsTrigger value="username">Username</TabsTrigger>
                 <TabsTrigger value="phone">Phone</TabsTrigger>
                 <TabsTrigger value="qrcode">QR Code</TabsTrigger>
+                <TabsTrigger value="new">New</TabsTrigger>
               </TabsList>
               
               <TabsContent value="username" className="space-y-4 mt-4">
@@ -138,6 +174,37 @@ export function P2PTransfer({ children }: P2PTransferProps) {
                 </div>
                 <Button onClick={handleQrScan} className="w-full">Open Scanner</Button>
               </TabsContent>
+              
+              <TabsContent value="new" className="space-y-4 mt-4">
+                <div className="space-y-2">
+                  <Label>Recipient Name</Label>
+                  <Input
+                    placeholder="Full Name"
+                    value={newRecipientName}
+                    onChange={(e) => setNewRecipientName(e.target.value)}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>Phone Number</Label>
+                  <Input
+                    placeholder="+242 0X XXX XXXX"
+                    value={newRecipientPhone}
+                    onChange={(e) => setNewRecipientPhone(e.target.value)}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label>Username (Optional)</Label>
+                  <Input
+                    placeholder="@username"
+                    value={newRecipientUsername}
+                    onChange={(e) => setNewRecipientUsername(e.target.value)}
+                  />
+                </div>
+                
+                <Button onClick={handleAddNewRecipient} className="w-full">Add Recipient</Button>
+              </TabsContent>
             </Tabs>
             
             <div className="space-y-2">
@@ -162,6 +229,22 @@ export function P2PTransfer({ children }: P2PTransferProps) {
                     <ChevronRight size={16} className="text-muted-foreground" />
                   </div>
                 ))}
+                
+                <div 
+                  className="flex items-center justify-between p-2 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                  onClick={() => setMethod("new")}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Plus size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Add New Recipient</p>
+                      <p className="text-xs text-muted-foreground">Create a new contact</p>
+                    </div>
+                  </div>
+                  <ChevronRight size={16} className="text-muted-foreground" />
+                </div>
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Bell, Headset, QrCode, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -40,8 +41,10 @@ const Index = () => {
     getUserProfile();
     
     // Add event listener for storage changes
-    const handleStorageChange = () => {
-      getUserProfile();
+    const handleStorageChange = (event) => {
+      if (event.key === "userProfile") {
+        getUserProfile();
+      }
     };
     
     window.addEventListener('storage', handleStorageChange);
@@ -62,9 +65,15 @@ const Index = () => {
       }, 3000);
     }
     
+    // Check for profile updates every few seconds to ensure consistency
+    const profileCheckInterval = setInterval(() => {
+      getUserProfile();
+    }, 3000);
+    
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('profileUpdated', handleProfileUpdate);
+      clearInterval(profileCheckInterval);
     };
   }, []);
 
@@ -104,7 +113,6 @@ const Index = () => {
               className="p-2 rounded-full hover:bg-muted/80 transition-colors relative"
             >
               <Headset size={20} className="text-muted-foreground" />
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">HELP</span>
             </Link>
             <button
               onClick={handleQrCodeClick}
@@ -125,7 +133,7 @@ const Index = () => {
         
         {/* Main balance card with blue gradient */}
         <Card className="mt-4 overflow-hidden border-none shadow-lg rounded-xl">
-          <div className="bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 text-white p-4">
+          <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 text-white p-4">
             <Balance balance={balance} currency={currency} />
             
             <div className="flex justify-end mt-4">
