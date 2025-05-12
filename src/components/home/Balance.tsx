@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Eye, EyeOff, Shield } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface BalanceProps {
@@ -26,7 +26,6 @@ export default function Balance({ balance, currency, className }: BalanceProps) 
     <div className={cn('flex flex-col items-center', className)}>
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center gap-2">
-          <Shield size={20} className="text-white/80" />
           <span className="text-sm font-medium text-white/90">Available Balance</span>
         </div>
         <button 

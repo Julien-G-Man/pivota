@@ -387,7 +387,7 @@ const Support = () => {
             >
               {message.sender === 'bot' && (
                 <Avatar className="h-8 w-8 mr-2 flex-shrink-0">
-                  <AvatarImage src="https://api.dicebear.com/7.x/bottts/svg?seed=Mona" />
+                  <AvatarImage src="/lovable-uploads/ab8d5fef-5952-443a-becb-12a55e92d46a.png" />
                   <AvatarFallback><MessageCircle className="text-primary" /></AvatarFallback>
                 </Avatar>
               )}

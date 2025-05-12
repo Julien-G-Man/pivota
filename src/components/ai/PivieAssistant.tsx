@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -41,7 +41,7 @@ export function PivieAssistant({
     // Add user message
     setMessages([...messages, { id: Date.now(), text: input, sender: 'user' }]);
     
-    // Get AI response based on context
+    // Get AI response based on context and user input
     let response;
     const userInput = input.toLowerCase();
 
@@ -50,11 +50,33 @@ export function PivieAssistant({
         response = "Based on your spending patterns, you're spending 15% more on food this month compared to last month. Would you like to set a budget alert?";
       } else if (userInput.includes('save') || userInput.includes('goal')) {
         response = "I can help you create a savings goal. What are you saving for?";
+      } else if (userInput.includes('transfer') || userInput.includes('send money')) {
+        response = "To transfer money, you can use the 'Send Money' option on your home screen. Would you like me to guide you through the process?";
+      } else if (userInput.includes('account') || userInput.includes('balance')) {
+        response = "Your current balance is 15,000,000 FCFA. You have increased your balance by 5% since last month. Great job saving!";
+      } else if (userInput.includes('card') || userInput.includes('credit')) {
+        response = "You can manage your cards in the Cards section. Would you like to see your card details or apply for a new card?";
+      } else if (userInput.includes('bill') || userInput.includes('payment')) {
+        response = "You have 3 upcoming bill payments this month. Would you like to review them or schedule a new payment?";
       } else {
-        response = "I can provide insights about your spending, help set budgets, or answer questions about your finances. What would you like to know?";
+        response = "I can help you manage your finances better. You can ask me about your spending, savings goals, transfers, account balance, or bill payments. What specific information are you looking for?";
+      }
+    } else if (context === 'support') {
+      if (userInput.includes('problem') || userInput.includes('issue')) {
+        response = "I'm sorry to hear you're experiencing an issue. Could you please describe it in more detail so I can help you better?";
+      } else if (userInput.includes('pin') || userInput.includes('password')) {
+        response = "To reset your PIN, go to Profile > Security > Reset PIN. You'll receive an OTP on your registered phone number.";
+      } else if (userInput.includes('human') || userInput.includes('agent')) {
+        response = "I'll connect you to a customer support agent. Please hold on while I transfer your chat.";
+      } else {
+        response = "I'm here to help with any questions or issues you might have. Feel free to ask about account issues, security, transactions, or connect with a human agent if needed.";
       }
     } else {
-      response = "I'm Pivie, your personal assistant. I can help you with transactions, account information, and financial advice. How can I assist you today?";
+      if (userInput.includes('hello') || userInput.includes('hi')) {
+        response = "Hello! How can I assist you with Pivota today?";
+      } else {
+        response = "I'm Pivie, your personal assistant. I can help you with transactions, account information, and financial advice. How can I assist you today?";
+      }
     }
 
     // Add bot response after a short delay

@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { Bell, Headset, Eye, EyeOff, ArrowRight, Shield, QrCode } from 'lucide-react';
+import { Bell, Headset, QrCode, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import BottomNavigation from '@/components/layout/BottomNavigation';
 import QuickActions from '@/components/home/QuickActions';
@@ -70,10 +69,7 @@ const Index = () => {
   }, []);
 
   const handleSupportClick = () => {
-    toast({
-      title: "Help",
-      description: "Redirecting to Pivota chat support...",
-    });
+    navigate('/support');
   };
 
   const handleNotificationClick = () => {
@@ -84,13 +80,6 @@ const Index = () => {
     toast({
       title: "QR Code",
       description: "Scan QR code feature coming soon!",
-    });
-  };
-
-  const handleSecurityClick = () => {
-    toast({
-      title: "Security Center",
-      description: "Security features coming soon!",
     });
   };
 
@@ -136,7 +125,7 @@ const Index = () => {
         
         {/* Main balance card with blue gradient */}
         <Card className="mt-4 overflow-hidden border-none shadow-lg rounded-xl">
-          <div className="bg-gradient-to-br from-blue-700 to-blue-600 text-white p-4">
+          <div className="bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 text-white p-4">
             <Balance balance={balance} currency={currency} />
             
             <div className="flex justify-end mt-4">
@@ -197,18 +186,8 @@ const Index = () => {
             onClick={() => toast({ title: "Promotion", description: "Promotion details coming soon!" })}
             className="bg-blue-700 text-white rounded-full px-3 py-1 text-xs"
           >
-            Click for Security
+            Learn More
           </Button>
-        </div>
-        
-        {/* Security Shield */}
-        <div className="fixed bottom-24 right-4">
-          <button
-            onClick={handleSecurityClick}
-            className="h-14 w-14 rounded-full bg-gradient-to-r from-blue-700 to-blue-600 flex items-center justify-center shadow-lg"
-          >
-            <Shield size={24} className="text-white" />
-          </button>
         </div>
       </div>
       
