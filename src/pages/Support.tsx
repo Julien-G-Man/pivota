@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Send, MessageCircle, Lightbulb, Languages, BarChart3, UserRound } from 'lucide-react';
@@ -249,7 +250,7 @@ const Support = () => {
     }
     
     if (language === 'en') {
-      if (input.includes('hello') || input.includes('hi')) || input.includes('good')  {
+      if (input.includes('hello') || input.includes('hi') || input.includes('good')) {
         return 'Hello! I\'m Pivie, your personal finance AI assistant. How can I assist you with Pivota today?';
       } else if (input.includes('reset') && input.includes('pin')) {
         return 'To reset your PIN, go to Profile > Security > Reset PIN. You will receive an OTP on your registered mobile number.';
