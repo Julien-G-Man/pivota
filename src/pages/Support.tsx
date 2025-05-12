@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
+import BottomNavigation from '@/components/layout/BottomNavigation';
 
 interface Message {
   id: string;
@@ -50,10 +51,10 @@ const Support = () => {
     {
       id: '1',
       text: activeLanguage === 'en' 
-        ? 'Hello! I\'m Mona, your virtual assistant. How can I help you today?' 
+        ? 'Hello! I\'m Pivie, your virtual assistant. How can I help you today?' 
         : activeLanguage === 'fr'
-        ? 'Bonjour! Je suis Mona, votre assistante virtuelle. Comment puis-je vous aider aujourd\'hui?'
-        : 'Mbote! Ngai Mona, mosungi na yo ya digital. Nakoki kosalisa yo lelo?',
+        ? 'Bonjour! Je suis Pivie, votre assistante virtuelle. Comment puis-je vous aider aujourd\'hui?'
+        : 'Mbote! Ngai Pivie, mosungi na yo ya digital. Nakoki kosalisa yo lelo?',
       sender: 'bot',
       timestamp: new Date(),
       language: activeLanguage
@@ -95,10 +96,10 @@ const Support = () => {
       const updatedMessage = {
         ...initialMessage,
         text: activeLanguage === 'en' 
-          ? 'Hello! I\'m Mona, your virtual assistant. How can I help you today?' 
+          ? 'Hello! I\'m Pivie, your virtual assistant. How can I help you today?' 
           : activeLanguage === 'fr'
-          ? 'Bonjour! Je suis Mona, votre assistante virtuelle. Comment puis-je vous aider aujourd\'hui?'
-          : 'Mbote! Ngai Mona, mosungi na yo ya digital. Nakoki kosalisa yo lelo?',
+          ? 'Bonjour! Je suis Pivie, votre assistante virtuelle. Comment puis-je vous aider aujourd\'hui?'
+          : 'Mbote! Ngai Pivie, mosungi na yo ya digital. Nakoki kosalisa yo lelo?',
         language: activeLanguage
       };
       
@@ -326,11 +327,11 @@ const Support = () => {
             >
               <ArrowLeft size={24} />
             </button>
-            <h1 className="text-2xl font-bold">Chat with Mona</h1>
+            <h1 className="text-2xl font-bold">Chat with Pivie</h1>
           </div>
           
           <Avatar className="h-10 w-10 border border-primary/20">
-            <AvatarImage src="https://api.dicebear.com/7.x/bottts/svg?seed=Mona" />
+            <AvatarImage src="/lovable-uploads/ab8d5fef-5952-443a-becb-12a55e92d46a.png" />
             <AvatarFallback><MessageCircle className="text-primary" /></AvatarFallback>
           </Avatar>
         </div>
@@ -486,6 +487,7 @@ const Support = () => {
           </Button>
         </div>
       </div>
+      <BottomNavigation />
     </div>
   );
 };

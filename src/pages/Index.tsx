@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Bell, Headset, Eye, EyeOff, ArrowRight, Shield, QrCode } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ import { AddMoneyDialog } from '@/components/transfer/AddMoneyDialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Balance from '@/components/home/Balance';
+import { PivieAssistant } from '@/components/ai/PivieAssistant';
 
 const Index = () => {
   const { toast } = useToast();
@@ -19,6 +21,7 @@ const Index = () => {
   const [userName, setUserName] = useState('Julien Gman');
   const [profilePicture, setProfilePicture] = useState('https://api.dicebear.com/7.x/avataaars/svg?seed=John');
   const [showBalance, setShowBalance] = useState(true);
+  const [showAssistant, setShowAssistant] = useState(false);
   
   // Get user profile from localStorage on component mount and when it changes
   useEffect(() => {
@@ -51,6 +54,15 @@ const Index = () => {
     
     window.addEventListener('profileUpdated', handleProfileUpdate);
     
+    // Show AI assistant tip after a delay for new users
+    const hasSeenAssistant = localStorage.getItem("hasSeenAssistant");
+    if (!hasSeenAssistant) {
+      setTimeout(() => {
+        setShowAssistant(true);
+        localStorage.setItem("hasSeenAssistant", "true");
+      }, 3000);
+    }
+    
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('profileUpdated', handleProfileUpdate);
@@ -60,7 +72,7 @@ const Index = () => {
   const handleSupportClick = () => {
     toast({
       title: "Help",
-      description: "Redirecting to Mona chat support...",
+      description: "Redirecting to Pivota chat support...",
     });
   };
 
@@ -137,6 +149,29 @@ const Index = () => {
           </div>
         </Card>
         
+        {/* Spending Insights */}
+        <Card className="mt-4 p-4 border-none shadow-sm">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="font-medium text-sm">Monthly Spending Insights</h3>
+            <Button variant="ghost" size="sm" className="text-xs p-0 h-auto" onClick={() => navigate('/finance')}>
+              View Details
+              <ArrowRight size={12} className="ml-1" />
+            </Button>
+          </div>
+          <div className="flex items-center space-x-1">
+            <div className="h-4 bg-blue-600 rounded-l-full" style={{ width: '35%' }}></div>
+            <div className="h-4 bg-green-500" style={{ width: '25%' }}></div>
+            <div className="h-4 bg-yellow-500" style={{ width: '15%' }}></div>
+            <div className="h-4 bg-red-500" style={{ width: '15%' }}></div>
+            <div className="h-4 bg-purple-500 rounded-r-full" style={{ width: '10%' }}></div>
+          </div>
+          <div className="flex text-xs mt-2 text-muted-foreground justify-between">
+            <span>Food 35%</span>
+            <span>Transport 25%</span>
+            <span>Utilities 15%</span>
+          </div>
+        </Card>
+        
         {/* Recent Transactions */}
         <div className="mt-4">
           <RecentTransactions compact={true} />
@@ -176,6 +211,14 @@ const Index = () => {
           </button>
         </div>
       </div>
+      
+      {/* Floating AI Assistant */}
+      <PivieAssistant 
+        isOpen={showAssistant}
+        onClose={() => setShowAssistant(false)}
+        initialMessage="Hi there! I'm Pivie, your Pivota financial assistant. Need help managing your money better? I notice your food spending is up 5% this month."
+        context="finance"
+      />
       
       <BottomNavigation />
     </div>
